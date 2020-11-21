@@ -1,9 +1,9 @@
-package com.udacity.load.app.domain.repository
+package com.udacity.load.app.data.datastore
 
 import com.udacity.load.app.domain.model.ErrorModel
 import com.udacity.load.app.domain.util.ResultType
 
-interface DownloadRepository {
+interface DownloadDataStore {
 
     suspend fun load(
         url: String
