@@ -6,13 +6,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainFragment">
+        tools:context=".main.MainFragment">
 
-        <com.udacity.load.app.LoadingButton
+        <Button
             android:id="@+id/custom_button"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_margin="20dp"
+            android:text="@string/app_name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

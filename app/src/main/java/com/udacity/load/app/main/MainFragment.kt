@@ -1,8 +1,9 @@
-package com.udacity.load.app
+package com.udacity.load.app.main
 
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,10 @@ class MainFragment : Fragment() {
     ): View? {
         val binding: FragmentMainBinding =
             FragmentMainBinding.inflate(LayoutInflater.from(container?.context))
+
+        binding.customButton.setOnClickListener {
+            Log.i("z- data", "true")
+        }
 
         return binding.root
     }

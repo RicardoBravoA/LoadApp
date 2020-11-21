@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/MainFragment"
-        android:name="com.udacity.load.app.MainFragment"
+        android:name="com.udacity.load.app.main.MainFragment"
         android:label="@string/main_fragment_label"
         tools:layout="@layout/fragment_main">
 
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/DetailFragment"
-        android:name="com.udacity.load.app.DetailFragment"
+        android:name="com.udacity.load.app.detail.DetailFragment"
         android:label="@string/detail_fragment_label"
         tools:layout="@layout/fragment_detail" />
 </navigation>

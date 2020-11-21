@@ -1,4 +1,4 @@
-package com.udacity.load.app
+package com.udacity.load.app.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
