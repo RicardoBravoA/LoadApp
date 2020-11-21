@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="LoadingButton"></declare-styleable>
+    <declare-styleable name="CircularView">
+        <attr name="cv_color" format="color" />
+    </declare-styleable>
 </resources>

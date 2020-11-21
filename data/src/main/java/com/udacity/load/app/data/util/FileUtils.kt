@@ -4,7 +4,6 @@ import android.util.Log
 import okhttp3.ResponseBody
 import java.io.*
 
-
 object FileUtils {
 
     fun saveFile(body: ResponseBody?, path: String): String {

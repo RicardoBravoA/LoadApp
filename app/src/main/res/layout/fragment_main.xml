@@ -8,6 +8,16 @@
         android:layout_height="match_parent"
         tools:context=".main.MainFragment">
 
+        <com.udacity.load.app.util.CircularView
+            android:id="@+id/custom_animation_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            app:cv_color="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Button
             android:id="@+id/custom_button"
             android:layout_width="0dp"

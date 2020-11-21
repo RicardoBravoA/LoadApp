@@ -4,13 +4,17 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.NotificationCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.udacity.load.app.databinding.FragmentMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainFragment : Fragment() {
 
@@ -21,9 +25,6 @@ class MainFragment : Fragment() {
     private lateinit var action: NotificationCompat.Action
 
     private val mainViewModel: MainViewModel by lazy {
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
-        }
         ViewModelProvider(this, MainViewModelFactory(requireActivity().application)).get(
             MainViewModel::class.java
         )
@@ -41,6 +42,15 @@ class MainFragment : Fragment() {
             Log.i("z- data", "true")
             mainViewModel.load("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip")
             mainViewModel.abc()
+        }
+
+//        binding.customAnimationView.setProgress(90f)
+
+        GlobalScope.launch(Dispatchers.Main) {
+            for (i in 0..100 step 10) {
+                binding.customAnimationView.setProgress(i.toFloat())
+                delay(1000L)
+            }
         }
 
         return binding.root
