@@ -7,14 +7,14 @@ import com.udacity.load.app.data.repository.DownloadDataRepository
 import com.udacity.load.app.domain.usecase.DownloadUseCase
 
 @Suppress("UNCHECKED_CAST")
-class MainViewModelFactory(val app: Application) : ViewModelProvider.Factory {
+class MainViewModelFactory(private val app: Application) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            val downloadUseCase = DownloadUseCase(DownloadDataRepository())
-            MainViewModel(
-                downloadUseCase
-            ) as T
+            @Suppress("UNCHECKED_CAST")
 
+            val downloadUseCase = DownloadUseCase(DownloadDataRepository())
+
+            return MainViewModel(app, downloadUseCase) as T
         }
         throw IllegalArgumentException("Unable to construct view model")
     }

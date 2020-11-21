@@ -7,9 +7,9 @@ import com.udacity.load.app.domain.util.ResultType
 
 class DownloadDataRepository : DownloadRepository {
 
-    override suspend fun load(url: String): ResultType<Boolean, ErrorModel> {
+    override suspend fun load(url: String, path: String): ResultType<Boolean, ErrorModel> {
         val downloadServiceDataStore = DownloadServiceDataStore()
-        return downloadServiceDataStore.load(url)
+        return downloadServiceDataStore.load(url, path)
     }
 
 }

@@ -7,8 +7,9 @@ import com.udacity.load.app.domain.util.ResultType
 class DownloadUseCase(private val downloadRepository: DownloadRepository) {
 
     suspend fun load(
-        url: String
+        url: String,
+        path: String
     ): ResultType<Boolean, ErrorModel> {
-        return downloadRepository.load(url)
+        return downloadRepository.load(url, path)
     }
 }

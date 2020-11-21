@@ -6,6 +6,7 @@ import com.udacity.load.app.domain.util.ResultType
 interface DownloadDataStore {
 
     suspend fun load(
-        url: String
+        url: String,
+        path: String
     ): ResultType<Boolean, ErrorModel>
 }
