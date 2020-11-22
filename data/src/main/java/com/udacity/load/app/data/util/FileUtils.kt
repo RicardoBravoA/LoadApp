@@ -11,23 +11,25 @@ object FileUtils {
         body: ResponseBody?,
         path: String,
         progressListener: ProgressListener
-    ): String {
+    ): String? {
         if (body == null)
             return ""
         var input: InputStream? = null
         try {
             input = body.byteStream()
+            val totalSizeString = body.contentLength().toString()
+            Log.i("z- totalSizeString", totalSizeString)
+            val totalSize = totalSizeString.toLong()
+            Log.i("z- totalSize", totalSize.toString())
             val fos = FileOutputStream(path)
             fos.use { output ->
-                val buffer = ByteArray(8 * 1024)
+                val buffer = ByteArray(4 * 1024)
                 var read: Int
                 var actualSize = 0L
-                val totalSize = body.contentLength()
-                Log.i("z- totalSize", totalSize.toString())
                 while (input.read(buffer).also { read = it } != -1) {
                     output.write(buffer, 0, read)
                     actualSize += read
-                    Log.i("z- actualSize", actualSize.toString())
+                    Log.i("z- data", "$actualSize - $totalSize")
                     progressListener.progress(calculateProgress(actualSize, totalSize))
                 }
                 output.flush()
@@ -35,36 +37,19 @@ object FileUtils {
             }
             Log.i("z- path", path)
             return path
-            /*val file = File(path, name)
-            Log.i("z- totalSize", file.length().toString())
-            body.byteStream().use { inputStream ->
-                FileOutputStream(file).use { outputStream ->
-                    val data = ByteArray(4 * 1024)
-                    var read: Int
-                    var actualSize = 0L
-                    val totalSize = body.contentLength()
-                    Log.i("z- totalSize", totalSize.toString())
-                    while (inputStream.read(data).also { read = it } != -1) {
-                        outputStream.write(data, 0, read)
-                        actualSize += read
-                        Log.i("z- actualSize", actualSize.toString())
-                        progressListener.progress(calculateProgress(actualSize, totalSize))
-                    }
-                    Log.i("z- totalSize", totalSize.toString())
-                    progressListener.progress(calculateProgress(totalSize, totalSize))
-                }
-            }*/
         } catch (e: Exception) {
-            Log.e("z- saveFile", e.toString())
+            e.printStackTrace()
         } finally {
             input?.close()
         }
-        return "z- no path"
+        return null
     }
 
 
-    private fun calculateProgress(actualSize: Long, totalSize: Long): Long {
-        return ((actualSize / totalSize) * 100)
+    private fun calculateProgress(actualSize: Long, totalSize: Long): Int {
+        val progress = (100 * actualSize / totalSize).toInt()
+        Log.i("z- calculateProgress", progress.toString())
+        return progress
     }
 
 }

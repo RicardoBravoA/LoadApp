@@ -18,12 +18,12 @@ object ApiManager {
     val retrofit: Retrofit
         get() {
 
-            /*val logging = HttpLoggingInterceptor()
+            val logging = HttpLoggingInterceptor()
             logging.level = HttpLoggingInterceptor.Level.NONE
 
             if (BuildConfig.DEBUG) {
                 logging.level = HttpLoggingInterceptor.Level.BODY
-            }*/
+            }
 
             val moshi = Moshi.Builder()
                 .add(KotlinJsonAdapterFactory())

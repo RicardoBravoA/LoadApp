@@ -54,7 +54,10 @@ class CircularView @JvmOverloads constructor(
         val width = width
         val top = 0
         rect!![left.toFloat(), top.toFloat(), left + width.toFloat()] = top + width.toFloat()
-        canvas.drawArc(rect!!, 0f, 360 * progress, true, paint!!)
+
+        if (progress > 0f) {
+            canvas.drawArc(rect!!, 0f, 360 * progress, true, paint!!)
+        }
     }
 
     fun setProgress(percentage: Float) {

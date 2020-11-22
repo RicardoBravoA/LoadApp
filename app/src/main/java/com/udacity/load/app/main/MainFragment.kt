@@ -12,10 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.udacity.load.app.data.listener.ProgressListener
 import com.udacity.load.app.databinding.FragmentMainBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class MainFragment : Fragment(), ProgressListener {
 
@@ -24,6 +21,7 @@ class MainFragment : Fragment(), ProgressListener {
     private lateinit var notificationManager: NotificationManager
     private lateinit var pendingIntent: PendingIntent
     private lateinit var action: NotificationCompat.Action
+    private lateinit var binding: FragmentMainBinding
 
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this, MainViewModelFactory(requireActivity().application, this)).get(
@@ -35,15 +33,15 @@ class MainFragment : Fragment(), ProgressListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentMainBinding =
-            FragmentMainBinding.inflate(inflater)
+        binding = FragmentMainBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
         binding.customButton.setOnClickListener {
             Log.i("z- data", "true")
-            GlobalScope.launch(Dispatchers.Main) {
+            GlobalScope.launch {
                 mainViewModel.load("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip")
             }
+
 
             /*GlobalScope.launch(Dispatchers.Main) {
                 for (i in 0..100 step 10) {
@@ -60,8 +58,11 @@ class MainFragment : Fragment(), ProgressListener {
         return binding.root
     }
 
-    override fun progress(value: Long) {
+    override fun progress(value: Int) {
         Log.i("z- progress", value.toString())
+        GlobalScope.launch(Dispatchers.Main) {
+            binding.customAnimationView.setProgress(value.toFloat())
+        }
     }
 
 }
