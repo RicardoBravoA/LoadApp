@@ -32,8 +32,4 @@ class MainViewModel(application: Application, private val downloadUseCase: Downl
         }
     }
 
-    fun abc() {
-        Log.i("z- data", "log")
-    }
-
 }
