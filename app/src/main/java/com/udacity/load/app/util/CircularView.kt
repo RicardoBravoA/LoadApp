@@ -55,7 +55,7 @@ class CircularView @JvmOverloads constructor(
         val top = 0
         rect!![left.toFloat(), top.toFloat(), left + width.toFloat()] = top + width.toFloat()
 
-        if (progress != 0f) {
+        if (progress > 0f) {
             canvas.drawArc(rect!!, 0f, 360 * progress, true, paint!!)
         }
     }

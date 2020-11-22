@@ -30,7 +30,7 @@ object ApiManager {
                 .build()
 
             val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(logging)
+//                .addInterceptor(logging)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)

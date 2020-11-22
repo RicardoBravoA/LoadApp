@@ -10,22 +10,21 @@ import android.view.ViewGroup
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.udacity.load.app.data.listener.ProgressListener
 import com.udacity.load.app.databinding.FragmentMainBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), ProgressListener {
 
     private var downloadID: Long = 0
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var pendingIntent: PendingIntent
     private lateinit var action: NotificationCompat.Action
+    private lateinit var binding: FragmentMainBinding
 
     private val mainViewModel: MainViewModel by lazy {
-        ViewModelProvider(this, MainViewModelFactory(requireActivity().application)).get(
+        ViewModelProvider(this, MainViewModelFactory(requireActivity().application, this)).get(
             MainViewModel::class.java
         )
     }
@@ -34,26 +33,36 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentMainBinding =
-            FragmentMainBinding.inflate(inflater)
+        binding = FragmentMainBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
         binding.customButton.setOnClickListener {
             Log.i("z- data", "true")
-            mainViewModel.load("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip")
-            mainViewModel.abc()
-        }
-
-//        binding.customAnimationView.setProgress(90f)
-
-        GlobalScope.launch(Dispatchers.Main) {
-            for (i in 0..100 step 10) {
-                binding.customAnimationView.setProgress(i.toFloat())
-                delay(1000L)
+            GlobalScope.launch {
+                mainViewModel.load("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip")
             }
-        }
 
+
+            /*GlobalScope.launch(Dispatchers.Main) {
+                for (i in 0..100 step 10) {
+                    binding.customAnimationView.setProgress(i.toFloat())
+                    delay(1000L)
+                }
+                delay(1000)
+                binding.view.visibility = View.VISIBLE
+                binding.motionLayout.transitionToEnd()
+
+            }*/
+
+        }
         return binding.root
+    }
+
+    override fun progress(value: Int) {
+        Log.i("z- progress", value.toString())
+        GlobalScope.launch(Dispatchers.Main) {
+            binding.customAnimationView.setProgress(value.toFloat())
+        }
     }
 
 }
