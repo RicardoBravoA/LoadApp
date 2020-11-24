@@ -16,7 +16,7 @@ class CircularView @JvmOverloads constructor(
 
     private var paint: Paint? = null
     private var rect: RectF? = null
-    private var progress = 0f
+    var angle = 0f
 
     @ColorInt
     private var backgroundColor: Int? = null
@@ -55,14 +55,6 @@ class CircularView @JvmOverloads constructor(
         val top = 0
         rect!![left.toFloat(), top.toFloat(), left + width.toFloat()] = top + width.toFloat()
 
-        if (progress > 0f) {
-            canvas.drawArc(rect!!, 0f, 360 * progress, true, paint!!)
-        }
+        canvas.drawArc(rect!!, 0f, angle, true, paint!!)
     }
-
-    fun setProgress(percentage: Float) {
-        this.progress = percentage / 100
-        invalidate()
-    }
-
 }

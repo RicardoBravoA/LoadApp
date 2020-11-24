@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.udacity.load.app.data.listener.ProgressListener
 import com.udacity.load.app.databinding.FragmentMainBinding
+import com.udacity.load.app.util.CircularViewAnimation
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -37,38 +39,48 @@ class MainFragment : Fragment(), ProgressListener {
         binding = FragmentMainBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
+        val circleAnimation = CircularViewAnimation(binding.customAnimationView, 360f)
+        circleAnimation.duration = 1000
+
         binding.customButton.setOnClickListener {
             Log.i("z- data", "true")
-            GlobalScope.launch {
+            /*GlobalScope.launch {
                 mainViewModel.load("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip")
-            }
+            }*/
 
 
-            /*GlobalScope.launch(Dispatchers.Main) {
-                for (i in 0..100 step 10) {
+            GlobalScope.launch(Dispatchers.Main) {
+                /*for (i in 0..100 step 1) {
                     binding.customAnimationView.setProgress(i.toFloat())
-                    delay(1000L)
-                }
-                delay(1000)
+                }*/
+                binding.customAnimationView.startAnimation(circleAnimation)
+//                delay(1000)
                 binding.view.visibility = View.VISIBLE
                 binding.motionLayout.transitionToEnd()
 
-            }*/
+            }
 
         }
         return binding.root
     }
 
     override fun load(progress: Int, contentLength: Long) {
-        if (progress == 100) {
-            println("z- completed")
-        } else {
-            println(contentLength)
-
+        GlobalScope.launch(Dispatchers.Main) {
+            /*for (i in 0..100 step 10) {
+                binding.customAnimationView.setProgress(i.toFloat())
+            }*/
+            /*binding.view.visibility = View.VISIBLE
+            binding.motionLayout.transitionToEnd()*/
             if (contentLength != -1L) {
                 Log.i("z- progress", "$progress - $contentLength")
+//                binding.customAnimationView.setProgress(progress.toFloat())
             }
+            if (progress == 100) {
+                println("z- completed")
+            }
+
         }
+
     }
 
 }
