@@ -12,7 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.udacity.load.app.data.listener.ProgressListener
 import com.udacity.load.app.databinding.FragmentMainBinding
-import kotlinx.coroutines.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainFragment : Fragment(), ProgressListener {
 
@@ -58,10 +59,15 @@ class MainFragment : Fragment(), ProgressListener {
         return binding.root
     }
 
-    override fun progress(value: Int) {
-        Log.i("z- progress", value.toString())
-        GlobalScope.launch(Dispatchers.Main) {
-            binding.customAnimationView.setProgress(value.toFloat())
+    override fun load(progress: Int, contentLength: Long) {
+        if (progress == 100) {
+            println("z- completed")
+        } else {
+            println(contentLength)
+
+            if (contentLength != -1L) {
+                Log.i("z- progress", "$progress - $contentLength")
+            }
         }
     }
 

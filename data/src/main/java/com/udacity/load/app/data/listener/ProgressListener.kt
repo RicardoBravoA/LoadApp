@@ -2,6 +2,5 @@ package com.udacity.load.app.data.listener
 
 interface ProgressListener {
 
-    fun progress(value: Int)
-
+    fun load(progress: Int, contentLength: Long)
 }
