@@ -64,6 +64,7 @@ class MainFragment : Fragment(), ProgressListener {
 
         binding.progressButton.setOnClickListener {
             binding.motionLayout.progress = 1f
+            binding.customAnimationView.progress(100f, 0L)
         }
 
         return binding.root
