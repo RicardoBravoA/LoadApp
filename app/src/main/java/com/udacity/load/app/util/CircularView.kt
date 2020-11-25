@@ -8,7 +8,6 @@ import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.udacity.load.app.R
 
-
 class CircularView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {

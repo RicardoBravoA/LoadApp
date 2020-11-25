@@ -7,18 +7,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.udacity.load.app.R
 import com.udacity.load.app.data.listener.ProgressListener
 import com.udacity.load.app.databinding.FragmentMainBinding
 import com.udacity.load.app.util.CircularViewAnimation
 import com.udacity.load.app.util.Constant
+import com.udacity.load.app.util.motion.CustomMotionListener
+import com.udacity.load.app.util.motion.CustomTransitionListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainFragment : Fragment(), ProgressListener {
+class MainFragment : Fragment(), ProgressListener, CustomMotionListener {
 
     private var downloadID: Long = 0
 
@@ -41,25 +45,17 @@ class MainFragment : Fragment(), ProgressListener {
         binding.lifecycleOwner = this
 
         binding.customButton.setOnClickListener {
-            Log.i("z- data", "true")
             GlobalScope.launch(Dispatchers.Main) {
 
-                Log.i("z- angle", binding.customAnimationView.angle.toString())
-
                 binding.view.visibility = View.VISIBLE
-//                binding.motionLayout.setTransition(R.inflater.view_start, R.id.view_end)
+                binding.motionLayout.setTransition(R.id.transition_start)
                 binding.motionLayout.setTransitionDuration(Constant.DURATION)
 
                 binding.customAnimationView.progress(100f)
-
+                binding.motionLayout.setTransitionListener(CustomTransitionListener(this@MainFragment))
                 binding.motionLayout.transitionToEnd()
 
-                /*binding.view.visibility = View.VISIBLE
-                binding.motionLayout.transitionToEnd()
-
-                val circleAnimation =
-                    CircularViewAnimation(binding.customAnimationView, 0f)
-                binding.customAnimationView.startAnimation(circleAnimation)
+                /*
                 mainViewModel.load("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip")*/
             }
 
@@ -88,6 +84,12 @@ class MainFragment : Fragment(), ProgressListener {
 
         }
 
+    }
+
+    override fun onTransitionCompleted(motionLayout: MotionLayout?) {
+        binding.motionLayout.setTransition(R.id.transition_end)
+        binding.motionLayout.setTransitionDuration(0)
+        binding.motionLayout.transitionToEnd()
     }
 
 }
