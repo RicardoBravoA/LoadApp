@@ -8,7 +8,6 @@ import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.udacity.load.app.R
 
-
 class CircularView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
@@ -56,16 +55,16 @@ class CircularView @JvmOverloads constructor(
         super.onDraw(canvas)
     }
 
-    fun progress(progress: Float) {
+    fun progress(progress: Float, duration: Long = Constant.DURATION.toLong()) {
         // restart animation
-        if (angle == 360f) {
+        if (angle != 0f) {
             angle = 0f
             val circleAnimation = CircularViewAnimation(this, 0f)
-            circleAnimation.duration = 1000
+            circleAnimation.duration = duration
             startAnimation(circleAnimation)
         }
         val circleAnimation = CircularViewAnimation(this, progress)
-        circleAnimation.duration = Constant.DURATION.toLong()
+        circleAnimation.duration = duration
         startAnimation(circleAnimation)
     }
 }
