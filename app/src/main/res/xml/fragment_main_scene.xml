@@ -26,11 +26,6 @@
 
     <Transition
         app:constraintSetEnd="@id/view_end"
-        app:constraintSetStart="@+id/view_start"
-        app:duration="2000">
-        <OnClick
-            app:clickAction="transitionToEnd"
-            app:targetId="@+id/view" />
-    </Transition>
+        app:constraintSetStart="@+id/view_start" />
 
 </MotionScene>

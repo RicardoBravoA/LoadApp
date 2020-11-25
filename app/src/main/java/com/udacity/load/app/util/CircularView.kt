@@ -1,14 +1,13 @@
 package com.udacity.load.app.util
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.udacity.load.app.R
+
 
 class CircularView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -16,7 +15,7 @@ class CircularView @JvmOverloads constructor(
 
     private var paint: Paint? = null
     private var rect: RectF? = null
-    private var progress = 0f
+    var angle = 0f
 
     @ColorInt
     private var backgroundColor: Int? = null
@@ -48,21 +47,25 @@ class CircularView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
-
         val left = 0
         val width = width
         val top = 0
         rect!![left.toFloat(), top.toFloat(), left + width.toFloat()] = top + width.toFloat()
 
-        if (progress > 0f) {
-            canvas.drawArc(rect!!, 0f, 360 * progress, true, paint!!)
+        canvas.drawArc(rect!!, 0f, angle, true, paint!!)
+        super.onDraw(canvas)
+    }
+
+    fun progress(progress: Float) {
+        // restart animation
+        if (angle == 360f) {
+            angle = 0f
+            val circleAnimation = CircularViewAnimation(this, 0f)
+            circleAnimation.duration = 1000
+            startAnimation(circleAnimation)
         }
+        val circleAnimation = CircularViewAnimation(this, progress)
+        circleAnimation.duration = Constant.DURATION.toLong()
+        startAnimation(circleAnimation)
     }
-
-    fun setProgress(percentage: Float) {
-        this.progress = percentage / 100
-        invalidate()
-    }
-
 }

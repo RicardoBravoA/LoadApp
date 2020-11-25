@@ -12,7 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.udacity.load.app.data.listener.ProgressListener
 import com.udacity.load.app.databinding.FragmentMainBinding
-import kotlinx.coroutines.*
+import com.udacity.load.app.util.CircularViewAnimation
+import com.udacity.load.app.util.Constant
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainFragment : Fragment(), ProgressListener {
 
@@ -38,31 +42,52 @@ class MainFragment : Fragment(), ProgressListener {
 
         binding.customButton.setOnClickListener {
             Log.i("z- data", "true")
-            GlobalScope.launch {
-                mainViewModel.load("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip")
-            }
+            GlobalScope.launch(Dispatchers.Main) {
 
+                Log.i("z- angle", binding.customAnimationView.angle.toString())
 
-            /*GlobalScope.launch(Dispatchers.Main) {
-                for (i in 0..100 step 10) {
-                    binding.customAnimationView.setProgress(i.toFloat())
-                    delay(1000L)
-                }
-                delay(1000)
                 binding.view.visibility = View.VISIBLE
+//                binding.motionLayout.setTransition(R.inflater.view_start, R.id.view_end)
+                binding.motionLayout.setTransitionDuration(Constant.DURATION)
+
+                binding.customAnimationView.progress(100f)
+
                 binding.motionLayout.transitionToEnd()
 
-            }*/
+                /*binding.view.visibility = View.VISIBLE
+                binding.motionLayout.transitionToEnd()
+
+                val circleAnimation =
+                    CircularViewAnimation(binding.customAnimationView, 0f)
+                binding.customAnimationView.startAnimation(circleAnimation)
+                mainViewModel.load("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip")*/
+            }
 
         }
         return binding.root
     }
 
-    override fun progress(value: Int) {
-        Log.i("z- progress", value.toString())
+    override fun load(progress: Int, contentLength: Long) {
         GlobalScope.launch(Dispatchers.Main) {
-            binding.customAnimationView.setProgress(value.toFloat())
+
+            if (contentLength != -1L) {
+                val circleAnimation =
+                    CircularViewAnimation(binding.customAnimationView, progress.toFloat())
+                circleAnimation.duration = 1000
+                binding.customAnimationView.startAnimation(circleAnimation)
+                val newProgress = progress.toFloat() / 100f
+                Log.i("z- progress", "$progress - $contentLength - $newProgress")
+
+//                binding.motionLayout.progress = newProgress
+
+
+            }
+            if (progress == 100) {
+                println("z- completed")
+            }
+
         }
+
     }
 
 }
