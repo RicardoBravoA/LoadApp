@@ -61,7 +61,7 @@ class CircularView @JvmOverloads constructor(
         if (angle == 360f) {
             angle = 0f
             val circleAnimation = CircularViewAnimation(this, 0f)
-            circleAnimation.duration = 1000
+            circleAnimation.duration = 0
             startAnimation(circleAnimation)
         }
         val circleAnimation = CircularViewAnimation(this, progress)
