@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,13 +15,11 @@ import com.udacity.load.app.data.listener.ProgressListener
 import com.udacity.load.app.databinding.FragmentMainBinding
 import com.udacity.load.app.util.CircularViewAnimation
 import com.udacity.load.app.util.Constant
-import com.udacity.load.app.util.motion.CustomMotionListener
-import com.udacity.load.app.util.motion.CustomTransitionListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainFragment : Fragment(), ProgressListener, CustomMotionListener {
+class MainFragment : Fragment(), ProgressListener {
 
     private var downloadID: Long = 0
 
@@ -48,11 +45,15 @@ class MainFragment : Fragment(), ProgressListener, CustomMotionListener {
             GlobalScope.launch(Dispatchers.Main) {
 
                 binding.view.visibility = View.VISIBLE
+
+                binding.motionLayout.setTransition(R.id.transition_end)
+                binding.motionLayout.setTransitionDuration(0)
+                binding.motionLayout.transitionToEnd()
+
                 binding.motionLayout.setTransition(R.id.transition_start)
                 binding.motionLayout.setTransitionDuration(Constant.DURATION)
 
                 binding.customAnimationView.progress(100f)
-                binding.motionLayout.setTransitionListener(CustomTransitionListener(this@MainFragment))
                 binding.motionLayout.transitionToEnd()
 
                 /*
@@ -60,6 +61,11 @@ class MainFragment : Fragment(), ProgressListener, CustomMotionListener {
             }
 
         }
+
+        binding.progressButton.setOnClickListener {
+            binding.motionLayout.progress = 1f
+        }
+
         return binding.root
     }
 
@@ -84,12 +90,6 @@ class MainFragment : Fragment(), ProgressListener, CustomMotionListener {
 
         }
 
-    }
-
-    override fun onTransitionCompleted(motionLayout: MotionLayout?) {
-        binding.motionLayout.setTransition(R.id.transition_end)
-        binding.motionLayout.setTransitionDuration(0)
-        binding.motionLayout.transitionToEnd()
     }
 
 }
