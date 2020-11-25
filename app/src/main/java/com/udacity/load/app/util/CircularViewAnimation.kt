@@ -1,6 +1,5 @@
 package com.udacity.load.app.util
 
-import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.Transformation
 
@@ -9,10 +8,6 @@ class CircularViewAnimation(
     progress: Float
 ) :
     Animation() {
-
-    init {
-        Log.i("z- circle", "true")
-    }
 
     private var oldAngle: Float = circularView.angle
     private var newAngle = (progress * 360) / 100
