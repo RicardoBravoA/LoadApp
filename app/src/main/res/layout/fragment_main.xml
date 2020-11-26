@@ -19,6 +19,14 @@
             app:srcCompat="@drawable/ic_download"
             app:tint="@color/teal_700" />
 
+        <RadioGroup
+            android:id="@+id/select_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
+
         <com.udacity.load.app.LoadingButton
             android:id="@+id/loading_button"
             android:layout_width="match_parent"
