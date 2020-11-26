@@ -18,22 +18,20 @@ class LoadingButton @JvmOverloads constructor(
 
     @ColorInt
     private var backgroundColor: Int? = null
-    var defaultText: String
+    var defaultText: String = context.getString(R.string.download)
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var actionText: String = context.getString(R.string.we_are_loading)
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     init {
-        backgroundColor = ContextCompat.getColor(context, R.color.purple_700_25)
-        defaultText = context.getString(R.string.download)
+        backgroundColor = ContextCompat.getColor(context, R.color.purple_700_50)
         init(attrs)
-    }
-
-    fun onClick() {
-        binding.motionLayout.setTransition(R.id.transition_end)
-        binding.motionLayout.setTransitionDuration(0)
-        binding.motionLayout.transitionToEnd()
-
-        binding.motionLayout.setTransition(R.id.transition_start)
-        binding.motionLayout.setTransitionDuration(Constant.DURATION)
-        binding.motionLayout.transitionToEnd()
     }
 
     private fun init(attrs: AttributeSet?) {
@@ -46,7 +44,7 @@ class LoadingButton @JvmOverloads constructor(
             if (it.hasValue(R.styleable.LoadingButton_lb_background)) {
                 backgroundColor = it.getColor(
                     R.styleable.LoadingButton_lb_background,
-                    ContextCompat.getColor(context, R.color.purple_700_25)
+                    ContextCompat.getColor(context, R.color.purple_700_50)
                 )
             }
 
@@ -54,11 +52,29 @@ class LoadingButton @JvmOverloads constructor(
                 defaultText = it.getString(R.styleable.LoadingButton_lb_default_text).toString()
             }
 
+            if (it.hasValue(R.styleable.LoadingButton_lb_action_text)) {
+                actionText = it.getString(R.styleable.LoadingButton_lb_action_text).toString()
+            }
+
             typedArray.recycle()
         }
 
         binding.customTextView.text = defaultText
         binding.view.setBackgroundColor(backgroundColor!!)
+
+        binding.motionLayout.setOnClickListener {
+            binding.customTextView.text = actionText
+            binding.circularView.progress(100f)
+
+            binding.motionLayout.setTransition(R.id.transition_end)
+            binding.motionLayout.setTransitionDuration(0)
+            binding.motionLayout.transitionToEnd()
+
+            binding.motionLayout.setTransition(R.id.transition_start)
+            binding.motionLayout.setTransitionDuration(Constant.DURATION)
+            binding.motionLayout.transitionToEnd()
+
+        }
     }
 
     fun animateToEnd() {
