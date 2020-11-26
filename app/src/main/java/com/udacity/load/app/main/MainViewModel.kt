@@ -26,6 +26,10 @@ class MainViewModel(
     val itemList: LiveData<List<ItemModel>>
         get() = _itemList
 
+    init {
+        getData(application)
+    }
+
     fun load(url: String) {
         viewModelScope.launch {
             try {
@@ -46,14 +50,17 @@ class MainViewModel(
         }
     }
 
-    fun getData(context: Context): List<ItemModel> {
-        val list = mutableListOf<ItemModel>()
+    private fun getData(context: Context) {
+        viewModelScope.launch {
+            val list = mutableListOf<ItemModel>()
 
-        list.add(ItemModel(1, resourcesProvider.glideMessage(), Constant.GLIDE_URL))
-        list.add(ItemModel(2, resourcesProvider.loadAppMessage(), Constant.LOAD_APP_URL))
-        list.add(ItemModel(3, resourcesProvider.retrofitMessage(), Constant.RETROFIT_URL))
+            list.add(ItemModel(1, resourcesProvider.glideMessage(), Constant.GLIDE_URL))
+            list.add(ItemModel(2, resourcesProvider.loadAppMessage(), Constant.LOAD_APP_URL))
+            list.add(ItemModel(3, resourcesProvider.retrofitMessage(), Constant.RETROFIT_URL))
 
-        return list
+            _itemList.value = list
+        }
+
     }
 
 }

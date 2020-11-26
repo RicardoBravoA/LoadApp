@@ -55,6 +55,10 @@ class MainFragment : Fragment(), ProgressListener {
             binding.customAnimationView.progress(100f, 0L)
         }*/
 
+        mainViewModel.itemList.observe(viewLifecycleOwner, {
+
+        })
+
         return binding.root
     }
 
