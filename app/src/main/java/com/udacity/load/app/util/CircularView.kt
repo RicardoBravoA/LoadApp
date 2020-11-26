@@ -40,7 +40,7 @@ class CircularView @JvmOverloads constructor(
                 ContextCompat.getColor(context, R.color.purple_700)
             )
             paint?.color = backgroundColor!!
-            it.recycle()
+            typedArray.recycle()
         }
 
     }

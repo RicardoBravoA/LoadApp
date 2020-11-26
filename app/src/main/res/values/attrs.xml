@@ -3,4 +3,9 @@
     <declare-styleable name="CircularView">
         <attr name="cv_color" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="LoadingButton">
+        <attr name="lb_color" format="color" />
+    </declare-styleable>
+
 </resources>
