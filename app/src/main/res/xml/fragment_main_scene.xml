@@ -23,7 +23,6 @@
             app:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
 
-
     <Transition
         android:id="@+id/transition_start"
         app:constraintSetEnd="@id/view_end"
