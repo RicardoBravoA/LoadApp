@@ -3,7 +3,10 @@ package com.udacity.load.app.main
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.udacity.load.app.domain.model.ItemModel
 import com.udacity.load.app.domain.usecase.DownloadUseCase
 import com.udacity.load.app.domain.util.ResultType
 import kotlinx.coroutines.launch
@@ -11,6 +14,10 @@ import java.lang.Exception
 
 class MainViewModel(application: Application, private val downloadUseCase: DownloadUseCase) :
     AndroidViewModel(application) {
+
+    private val _itemList = MutableLiveData<List<ItemModel>>()
+    val itemList: LiveData<List<ItemModel>>
+        get() = _itemList
 
     fun load(url: String) {
         viewModelScope.launch {
