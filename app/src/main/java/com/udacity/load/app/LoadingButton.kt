@@ -78,10 +78,12 @@ class LoadingButton @JvmOverloads constructor(
         binding.motionLayout.setTransition(R.id.transition_end)
         binding.motionLayout.setTransitionDuration(0)
         binding.motionLayout.transitionToEnd()
+        binding.circularView.progress(0f, 0L)
     }
 
     fun complete() {
         binding.motionLayout.progress = 1f
+        binding.circularView.progress(100f, 0L)
     }
 
 }

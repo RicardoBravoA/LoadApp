@@ -56,6 +56,16 @@ class MainFragment : Fragment() {
             Log.i("z- itemModel", itemModel.toString())
         }
 
+        mainViewModel.success.observe(viewLifecycleOwner, {
+            if (it) {
+                Log.i("z- success", "true")
+                binding.loadingButton.complete()
+            } else {
+                Log.i("z- success", "error")
+                binding.loadingButton.clear()
+            }
+        })
+
         binding.loadingButton.setOnClickListener {
             itemModel?.let {
                 binding.loadingButton.onClick()
