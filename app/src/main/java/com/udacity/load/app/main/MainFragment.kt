@@ -3,6 +3,7 @@ package com.udacity.load.app.main
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ class MainFragment : Fragment(), ProgressListener {
     private lateinit var pendingIntent: PendingIntent
     private lateinit var action: NotificationCompat.Action
     private lateinit var binding: FragmentMainBinding
+    private var itemModel: ItemModel? = null
 
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this, MainViewModelFactory(requireActivity().application, this)).get(
@@ -59,6 +61,15 @@ class MainFragment : Fragment(), ProgressListener {
             showData(it)
         })
 
+        binding.selectRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+            val radioButton = group.findViewById<View>(checkedId) as RadioButton
+            val mySelectedIndex = radioButton.tag as Int
+
+            itemModel =
+                mainViewModel.itemList.value?.firstOrNull { mySelectedIndex == it.id }
+            Log.i("z- itemModel", itemModel.toString())
+        }
+
         return binding.root
     }
 
@@ -70,6 +81,7 @@ class MainFragment : Fragment(), ProgressListener {
             val textSize =
                 (resources.getDimension(R.dimen.size_18) / resources.displayMetrics.scaledDensity)
             radioButton.textSize = textSize
+            radioButton.tag = it.id
 
             val params = RadioGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
