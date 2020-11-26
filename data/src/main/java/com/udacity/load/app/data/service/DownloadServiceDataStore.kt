@@ -1,10 +1,8 @@
 package com.udacity.load.app.data.service
 
 import com.udacity.load.app.data.datastore.DownloadDataStore
-import com.udacity.load.app.data.listener.ProgressListener
 import com.udacity.load.app.data.mapper.ErrorMapper
 import com.udacity.load.app.data.network.ApiManager
-import com.udacity.load.app.data.util.ProgressInterceptor
 import com.udacity.load.app.data.util.FileUtils
 import com.udacity.load.app.data.util.RetrofitErrorUtil
 import com.udacity.load.app.domain.model.ErrorModel
@@ -12,11 +10,11 @@ import com.udacity.load.app.domain.util.ResultType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class DownloadServiceDataStore(private val progressListener: ProgressListener) :
+class DownloadServiceDataStore() :
     DownloadDataStore {
 
     override suspend fun load(url: String, path: String): ResultType<Boolean, ErrorModel> {
-        val response = ApiManager.get(ProgressInterceptor(progressListener)).load(url)
+        val response = ApiManager.get().load(url)
         return if (response.isSuccessful) {
             val value = path + "/${System.currentTimeMillis()}.zip"
             withContext(Dispatchers.IO) {

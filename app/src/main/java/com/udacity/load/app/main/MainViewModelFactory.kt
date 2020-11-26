@@ -10,14 +10,13 @@ import com.udacity.load.app.util.resources.ResourcesProvider
 
 @Suppress("UNCHECKED_CAST")
 class MainViewModelFactory(
-    private val app: Application,
-    private val progressListener: ProgressListener
+    private val app: Application
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
 
-            val downloadUseCase = DownloadUseCase(DownloadDataRepository(progressListener))
+            val downloadUseCase = DownloadUseCase(DownloadDataRepository())
             val resourcesProvider = ResourcesProvider(app)
 
             return MainViewModel(app, downloadUseCase, resourcesProvider) as T

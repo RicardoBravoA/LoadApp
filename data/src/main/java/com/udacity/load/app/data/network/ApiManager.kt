@@ -5,7 +5,6 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.udacity.load.app.data.BuildConfig
 import com.udacity.load.app.data.util.Constants
-import com.udacity.load.app.data.util.ProgressInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -15,7 +14,6 @@ import java.util.concurrent.TimeUnit
 object ApiManager {
 
     private var apiInterface: ApiInterface? = null
-    private lateinit var progressInterceptor: ProgressInterceptor
 
     val retrofit: Retrofit
         get() {
@@ -32,7 +30,6 @@ object ApiManager {
                 .build()
 
             val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(progressInterceptor)
                 .addInterceptor(logging)
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
@@ -47,8 +44,7 @@ object ApiManager {
                 .build()
         }
 
-    fun get(progressInterceptor: ProgressInterceptor): ApiInterface {
-        this.progressInterceptor = progressInterceptor
+    fun get(): ApiInterface {
 
         if (apiInterface == null) {
             apiInterface = retrofit.create(ApiInterface::class.java)

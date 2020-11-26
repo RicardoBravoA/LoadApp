@@ -14,11 +14,10 @@ import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.udacity.load.app.R
-import com.udacity.load.app.data.listener.ProgressListener
 import com.udacity.load.app.databinding.FragmentMainBinding
 import com.udacity.load.app.domain.model.ItemModel
 
-class MainFragment : Fragment(), ProgressListener {
+class MainFragment : Fragment() {
 
     private var downloadID: Long = 0
 
@@ -31,7 +30,7 @@ class MainFragment : Fragment(), ProgressListener {
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(
             this,
-            MainViewModelFactory(requireActivity().application, this)
+            MainViewModelFactory(requireActivity().application)
         ).get(
             MainViewModel::class.java
         )
@@ -110,29 +109,6 @@ class MainFragment : Fragment(), ProgressListener {
 
             binding.selectRadioGroup.addView(radioButton)
         }
-
-    }
-
-    override fun load(progress: Int, contentLength: Long) {
-        /*GlobalScope.launch(Dispatchers.Main) {
-
-            if (contentLength != -1L) {
-                val circleAnimation =
-                    CircularViewAnimation(binding.customAnimationView, progress.toFloat())
-                circleAnimation.duration = 1000
-                binding.customAnimationView.startAnimation(circleAnimation)
-                val newProgress = progress.toFloat() / 100f
-                Log.i("z- progress", "$progress - $contentLength - $newProgress")
-
-//                binding.motionLayout.progress = newProgress
-
-
-            }
-            if (progress == 100) {
-                println("z- completed")
-            }
-
-        }*/
 
     }
 
