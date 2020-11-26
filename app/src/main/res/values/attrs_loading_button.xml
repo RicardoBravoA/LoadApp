@@ -3,6 +3,7 @@
     <declare-styleable name="LoadingButton">
         <attr name="lb_background" format="color" />
         <attr name="lb_default_text" format="string" />
+        <attr name="lb_action_text" format="string" />
     </declare-styleable>
 
 </resources>

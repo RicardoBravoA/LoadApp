@@ -2,6 +2,7 @@ package com.udacity.load.app
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,11 +19,19 @@ class LoadingButton @JvmOverloads constructor(
 
     @ColorInt
     private var backgroundColor: Int? = null
-    var defaultText: String
+    var defaultText: String = context.getString(R.string.download)
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var actionText: String = context.getString(R.string.we_are_loading)
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     init {
         backgroundColor = ContextCompat.getColor(context, R.color.purple_700_25)
-        defaultText = context.getString(R.string.download)
         init(attrs)
     }
 
@@ -54,11 +63,19 @@ class LoadingButton @JvmOverloads constructor(
                 defaultText = it.getString(R.styleable.LoadingButton_lb_default_text).toString()
             }
 
+            if (it.hasValue(R.styleable.LoadingButton_lb_action_text)) {
+                actionText = it.getString(R.styleable.LoadingButton_lb_action_text).toString()
+            }
+
             typedArray.recycle()
         }
 
         binding.customTextView.text = defaultText
         binding.view.setBackgroundColor(backgroundColor!!)
+
+        binding.motionLayout.setOnClickListener {
+            binding.customTextView.text = actionText
+        }
     }
 
     fun animateToEnd() {
