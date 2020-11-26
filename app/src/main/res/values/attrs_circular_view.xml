@@ -3,4 +3,5 @@
     <declare-styleable name="CircularView">
         <attr name="cv_color" format="color" />
     </declare-styleable>
+
 </resources>

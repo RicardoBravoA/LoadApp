@@ -10,11 +10,9 @@ import android.view.ViewGroup
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.udacity.load.app.R
 import com.udacity.load.app.data.listener.ProgressListener
 import com.udacity.load.app.databinding.FragmentMainBinding
 import com.udacity.load.app.util.CircularViewAnimation
-import com.udacity.load.app.util.Constant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -43,18 +41,9 @@ class MainFragment : Fragment(), ProgressListener {
 
         binding.customButton.setOnClickListener {
             GlobalScope.launch(Dispatchers.Main) {
-
-                binding.view.visibility = View.VISIBLE
-
-                binding.motionLayout.setTransition(R.id.transition_end)
-                binding.motionLayout.setTransitionDuration(0)
-                binding.motionLayout.transitionToEnd()
-
-                binding.motionLayout.setTransition(R.id.transition_start)
-                binding.motionLayout.setTransitionDuration(Constant.DURATION)
+                binding.loadingButton.onClick()
 
                 binding.customAnimationView.progress(100f)
-                binding.motionLayout.transitionToEnd()
 
                 /*
                 mainViewModel.load("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip")*/
@@ -63,7 +52,7 @@ class MainFragment : Fragment(), ProgressListener {
         }
 
         binding.progressButton.setOnClickListener {
-            binding.motionLayout.progress = 1f
+            binding.loadingButton.animateToEnd()
             binding.customAnimationView.progress(100f, 0L)
         }
 
