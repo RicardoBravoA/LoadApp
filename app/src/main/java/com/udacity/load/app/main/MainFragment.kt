@@ -51,7 +51,7 @@ class MainFragment : Fragment(), ProgressListener {
         }
 
         binding.progressButton.setOnClickListener {
-            binding.loadingButton.animateToEnd()
+            binding.loadingButton.complete()
             binding.customAnimationView.progress(100f, 0L)
         }
 

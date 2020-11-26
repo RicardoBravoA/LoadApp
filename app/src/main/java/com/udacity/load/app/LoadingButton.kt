@@ -63,6 +63,7 @@ class LoadingButton @JvmOverloads constructor(
         binding.view.setBackgroundColor(backgroundColor!!)
 
         binding.motionLayout.setOnClickListener {
+
             binding.customTextView.text = actionText
             binding.circularView.progress(100f)
 
@@ -77,7 +78,7 @@ class LoadingButton @JvmOverloads constructor(
         }
     }
 
-    fun animateToEnd() {
+    fun complete() {
         binding.motionLayout.progress = 1f
     }
 
