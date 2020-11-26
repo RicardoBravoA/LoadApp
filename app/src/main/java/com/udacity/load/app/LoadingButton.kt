@@ -2,6 +2,8 @@ package com.udacity.load.app
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.annotation.ColorInt
@@ -21,12 +23,14 @@ class LoadingButton @JvmOverloads constructor(
     private var backgroundColor: Int? = null
 
     init {
-        backgroundColor = ContextCompat.getColor(context, R.color.purple_700)
+        backgroundColor = ContextCompat.getColor(context, R.color.purple_500_50)
+
+        val customTextView = CustomTextView(context)
+
         init(attrs)
     }
 
     fun onClick() {
-
         binding.motionLayout.setTransition(R.id.transition_end)
         binding.motionLayout.setTransitionDuration(0)
         binding.motionLayout.transitionToEnd()
@@ -44,9 +48,10 @@ class LoadingButton @JvmOverloads constructor(
 
         typedArray.let {
             backgroundColor = typedArray.getColor(
-                R.styleable.LoadingButton_lb_color,
+                R.styleable.LoadingButton_lb_background,
                 ContextCompat.getColor(context, R.color.purple_700)
             )
+            binding.view.setBackgroundColor(backgroundColor!!)
 
             typedArray.recycle()
         }
