@@ -41,7 +41,7 @@ class CustomTextView @JvmOverloads constructor(
         val textPaint = TextPaint()
         textPaint.textAlign = Paint.Align.CENTER
         textPaint.textSize = 20 * resources.displayMetrics.density
-        textPaint.color = Color.BLACK
+        textPaint.color = Color.WHITE
 
         val xPos = canvas.width / 2
         val yPos = (canvas.height / 2 - (textPaint.descent() + textPaint.ascent()) / 2)
