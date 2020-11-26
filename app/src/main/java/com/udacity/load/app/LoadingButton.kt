@@ -23,7 +23,7 @@ class LoadingButton @JvmOverloads constructor(
     private var backgroundColor: Int? = null
 
     init {
-        backgroundColor = ContextCompat.getColor(context, R.color.purple_500_30)
+        backgroundColor = ContextCompat.getColor(context, R.color.accent_variant)
         init(attrs)
     }
 
@@ -46,7 +46,7 @@ class LoadingButton @JvmOverloads constructor(
         typedArray.let {
             backgroundColor = typedArray.getColor(
                 R.styleable.LoadingButton_lb_background,
-                ContextCompat.getColor(context, R.color.purple_700)
+                ContextCompat.getColor(context, R.color.accent_variant)
             )
             binding.view.setBackgroundColor(backgroundColor!!)
 
