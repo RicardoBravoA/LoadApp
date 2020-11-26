@@ -2,7 +2,6 @@ package com.udacity.load.app.util.resources
 
 import android.content.Context
 import com.udacity.load.app.R
-import com.udacity.load.app.util.resources.ResourcesInterface
 
 class ResourcesProvider(private val context: Context) : ResourcesInterface {
 
