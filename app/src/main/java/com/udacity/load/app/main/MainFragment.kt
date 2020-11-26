@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +17,6 @@ import com.udacity.load.app.R
 import com.udacity.load.app.data.listener.ProgressListener
 import com.udacity.load.app.databinding.FragmentMainBinding
 import com.udacity.load.app.domain.model.ItemModel
-
 
 class MainFragment : Fragment(), ProgressListener {
 
@@ -29,7 +29,10 @@ class MainFragment : Fragment(), ProgressListener {
     private var itemModel: ItemModel? = null
 
     private val mainViewModel: MainViewModel by lazy {
-        ViewModelProvider(this, MainViewModelFactory(requireActivity().application, this)).get(
+        ViewModelProvider(
+            this,
+            MainViewModelFactory(requireActivity().application, this)
+        ).get(
             MainViewModel::class.java
         )
     }
@@ -68,6 +71,18 @@ class MainFragment : Fragment(), ProgressListener {
             itemModel =
                 mainViewModel.itemList.value?.firstOrNull { mySelectedIndex == it.id }
             Log.i("z- itemModel", itemModel.toString())
+        }
+
+        binding.loadingButton.setOnClickListener {
+            itemModel?.let {
+                binding.loadingButton.onClick()
+            } ?: Toast.makeText(
+                requireContext(),
+                requireContext().getString(R.string.error_select_group),
+                Toast.LENGTH_SHORT
+            )
+                .show()
+
         }
 
         return binding.root

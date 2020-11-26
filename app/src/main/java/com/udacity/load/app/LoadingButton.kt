@@ -61,21 +61,23 @@ class LoadingButton @JvmOverloads constructor(
 
         binding.customTextView.text = defaultText
         binding.view.setBackgroundColor(backgroundColor!!)
+    }
 
-        binding.motionLayout.setOnClickListener {
+    fun onClick() {
+        binding.customTextView.text = actionText
+        binding.circularView.progress(100f)
 
-            binding.customTextView.text = actionText
-            binding.circularView.progress(100f)
+        clear()
 
-            binding.motionLayout.setTransition(R.id.transition_end)
-            binding.motionLayout.setTransitionDuration(0)
-            binding.motionLayout.transitionToEnd()
+        binding.motionLayout.setTransition(R.id.transition_start)
+        binding.motionLayout.setTransitionDuration(Constant.DURATION)
+        binding.motionLayout.transitionToEnd()
+    }
 
-            binding.motionLayout.setTransition(R.id.transition_start)
-            binding.motionLayout.setTransitionDuration(Constant.DURATION)
-            binding.motionLayout.transitionToEnd()
-
-        }
+    fun clear() {
+        binding.motionLayout.setTransition(R.id.transition_end)
+        binding.motionLayout.setTransitionDuration(0)
+        binding.motionLayout.transitionToEnd()
     }
 
     fun complete() {
