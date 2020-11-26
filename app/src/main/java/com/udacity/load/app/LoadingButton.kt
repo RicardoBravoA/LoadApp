@@ -2,7 +2,6 @@ package com.udacity.load.app
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -75,6 +74,7 @@ class LoadingButton @JvmOverloads constructor(
 
         binding.motionLayout.setOnClickListener {
             binding.customTextView.text = actionText
+            binding.circularView.progress(100f)
         }
     }
 

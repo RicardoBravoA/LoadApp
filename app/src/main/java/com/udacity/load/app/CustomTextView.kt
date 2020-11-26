@@ -41,7 +41,7 @@ class CustomTextView @JvmOverloads constructor(
     private fun drawCenter(canvas: Canvas) {
         val textPaint = TextPaint()
         textPaint.textAlign = Paint.Align.CENTER
-        textPaint.textSize = 20 * resources.displayMetrics.density
+        textPaint.textSize = TEXT_SIZE * resources.displayMetrics.density
         textPaint.color = Color.WHITE
 
         val xPos = canvas.width / 2
@@ -53,5 +53,9 @@ class CustomTextView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         drawCenter(canvas)
+    }
+
+    companion object {
+        const val TEXT_SIZE = 20
     }
 }
