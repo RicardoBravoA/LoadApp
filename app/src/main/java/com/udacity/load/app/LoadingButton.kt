@@ -30,7 +30,7 @@ class LoadingButton @JvmOverloads constructor(
         }
 
     init {
-        backgroundColor = ContextCompat.getColor(context, R.color.purple_700_25)
+        backgroundColor = ContextCompat.getColor(context, R.color.purple_700_50)
         init(attrs)
     }
 
@@ -44,7 +44,7 @@ class LoadingButton @JvmOverloads constructor(
             if (it.hasValue(R.styleable.LoadingButton_lb_background)) {
                 backgroundColor = it.getColor(
                     R.styleable.LoadingButton_lb_background,
-                    ContextCompat.getColor(context, R.color.purple_700_25)
+                    ContextCompat.getColor(context, R.color.purple_700_50)
                 )
             }
 
