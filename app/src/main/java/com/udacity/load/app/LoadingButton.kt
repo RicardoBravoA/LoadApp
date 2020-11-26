@@ -1,20 +1,17 @@
 package com.udacity.load.app
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.annotation.ColorInt
-import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.udacity.load.app.databinding.LoadingButtonBinding
 import com.udacity.load.app.util.Constant
 
 class LoadingButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : MotionLayout(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var binding: LoadingButtonBinding =
         LoadingButtonBinding.inflate(LayoutInflater.from(context), this, true)
@@ -53,17 +50,10 @@ class LoadingButton @JvmOverloads constructor(
             typedArray.recycle()
         }
 
-
-//        binding.customTextView.text = "Woz!"
     }
 
     fun animateToEnd() {
         binding.motionLayout.progress = 1f
-    }
-
-    override fun onDraw(canvas: Canvas?) {
-        super.onDraw(canvas)
-
     }
 
 }
