@@ -26,9 +26,8 @@
 
             <com.udacity.load.app.CustomTextView
                 android:id="@+id/custom_text_view"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                app:ctv_text="Woz!" />
+                android:layout_width="@dimen/dimen_150"
+                android:layout_height="wrap_content" />
 
             <com.udacity.load.app.util.CircularView
                 android:id="@+id/circular_view"
@@ -39,7 +38,7 @@
 
         <View
             android:id="@+id/view"
-            android:layout_width="1dp"
+            android:layout_width="@dimen/dimen_1"
             android:layout_height="match_parent"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
