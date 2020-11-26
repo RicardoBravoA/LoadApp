@@ -29,11 +29,13 @@ class CustomTextView @JvmOverloads constructor(
         )
 
         typedArray.let {
-            text = typedArray.getString(
+            text = it.getString(
                 R.styleable.CustomTextView_ctv_text
             )
             typedArray.recycle()
         }
+        invalidate()
+
     }
 
     private fun drawCenter(canvas: Canvas) {

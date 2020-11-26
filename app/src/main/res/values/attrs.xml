@@ -6,6 +6,7 @@
 
     <declare-styleable name="LoadingButton">
         <attr name="lb_background" format="color" />
+        <attr name="lb_default_text" format="string" />
     </declare-styleable>
 
     <declare-styleable name="CustomTextView">

@@ -18,9 +18,11 @@ class LoadingButton @JvmOverloads constructor(
 
     @ColorInt
     private var backgroundColor: Int? = null
+    var defaultText: String
 
     init {
         backgroundColor = ContextCompat.getColor(context, R.color.purple_700_25)
+        defaultText = context.getString(R.string.download)
         init(attrs)
     }
 
@@ -41,17 +43,22 @@ class LoadingButton @JvmOverloads constructor(
         )
 
         typedArray.let {
-            backgroundColor = typedArray.getColor(
-                R.styleable.LoadingButton_lb_background,
-                ContextCompat.getColor(context, R.color.purple_700_25)
-            )
-            binding.view.setBackgroundColor(backgroundColor!!)
+            if (it.hasValue(R.styleable.LoadingButton_lb_background)) {
+                backgroundColor = it.getColor(
+                    R.styleable.LoadingButton_lb_background,
+                    ContextCompat.getColor(context, R.color.purple_700_25)
+                )
+            }
+
+            if (it.hasValue(R.styleable.LoadingButton_lb_default_text)) {
+                defaultText = it.getString(R.styleable.LoadingButton_lb_default_text).toString()
+            }
 
             typedArray.recycle()
         }
 
-        binding.customTextView.text = "Woz!Add"
-
+        binding.customTextView.text = defaultText
+        binding.view.setBackgroundColor(backgroundColor!!)
     }
 
     fun animateToEnd() {
