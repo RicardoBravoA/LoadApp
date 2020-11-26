@@ -12,7 +12,7 @@ class CustomTextView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    var text: String? = "Woz!"
+    var text: String? = null
         set(value) {
             field = value
             invalidate()
@@ -36,8 +36,7 @@ class CustomTextView @JvmOverloads constructor(
         }
     }
 
-    private fun drawCenter(canvas: Canvas, text: String) {
-
+    private fun drawCenter(canvas: Canvas) {
         val textPaint = TextPaint()
         textPaint.textAlign = Paint.Align.CENTER
         textPaint.textSize = 20 * resources.displayMetrics.density
@@ -45,12 +44,12 @@ class CustomTextView @JvmOverloads constructor(
 
         val xPos = canvas.width / 2
         val yPos = (canvas.height / 2 - (textPaint.descent() + textPaint.ascent()) / 2)
-        canvas.drawText(text, xPos.toFloat(), yPos, textPaint)
+        text?.let { canvas.drawText(it, xPos.toFloat(), yPos, textPaint) }
 
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        drawCenter(canvas, "Woz!")
+        drawCenter(canvas)
     }
 }

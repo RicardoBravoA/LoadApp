@@ -50,6 +50,8 @@ class LoadingButton @JvmOverloads constructor(
             typedArray.recycle()
         }
 
+        binding.customTextView.text = "Woz!Add"
+
     }
 
     fun animateToEnd() {
