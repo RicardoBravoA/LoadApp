@@ -28,7 +28,7 @@
             android:id="@+id/motion_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/custom_button_size"
-            android:background="@color/accent"
+            android:background="@color/teal_15"
             app:layoutDescription="@xml/fragment_main_scene"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

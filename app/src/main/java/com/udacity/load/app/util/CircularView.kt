@@ -20,7 +20,7 @@ class CircularView @JvmOverloads constructor(
     private var backgroundColor: Int? = null
 
     init {
-        backgroundColor = ContextCompat.getColor(context, R.color.accent)
+        backgroundColor = ContextCompat.getColor(context, R.color.teal_700)
         paint = Paint()
         paint?.color = backgroundColor as Int
         paint?.isAntiAlias = true
@@ -37,7 +37,7 @@ class CircularView @JvmOverloads constructor(
         typedArray.let {
             backgroundColor = typedArray.getColor(
                 R.styleable.CircularView_cv_color,
-                ContextCompat.getColor(context, R.color.accent)
+                ContextCompat.getColor(context, R.color.teal_700)
             )
             paint?.color = backgroundColor!!
             typedArray.recycle()

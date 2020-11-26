@@ -2,21 +2,13 @@ package com.udacity.load.app
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.Paint.Align
-import android.graphics.Rect
-import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
-import androidx.core.content.ContextCompat
-
 
 class CustomTextView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
-
-    var textPaint: TextPaint? = null
 
     var text: String? = "Woz!"
         set(value) {
@@ -25,10 +17,6 @@ class CustomTextView @JvmOverloads constructor(
         }
 
     init {
-        textPaint = TextPaint()
-        textPaint!!.isAntiAlias = true
-        textPaint!!.textSize = 16 * resources.displayMetrics.density
-        textPaint!!.color = Color.BLACK
         init(attrs)
     }
 
@@ -46,21 +34,25 @@ class CustomTextView @JvmOverloads constructor(
         }
     }
 
-    private fun getTextHeight(text: String, paint: Paint): Float {
-        val rect = Rect()
-        paint.getTextBounds(text, 0, text.length, rect)
-        return rect.height().toFloat()
-    }
-
     private fun drawCenter(canvas: Canvas, text: String) {
-        val textPaint = TextPaint()
+        /*val textPaint = TextPaint()
         textPaint.textAlign = Align.CENTER
         textPaint.textSize = 20 * resources.displayMetrics.density
-        textPaint.color = ContextCompat.getColor(context, R.color.white)
+        textPaint.color = Color.WHITE
 
         val xPos = canvas.width / 2
         val yPos = (canvas.height / 2 - (textPaint.descent() + textPaint.ascent()) / 2).toInt()
-        canvas.drawText(text, xPos.toFloat(), yPos.toFloat(), textPaint)
+        canvas.drawText(text, xPos.toFloat(), yPos.toFloat(), textPaint)*/
+
+        val textPaint = Paint()
+        textPaint.textAlign = Paint.Align.CENTER
+
+        val xPos = canvas.width / 2
+        val yPos = (canvas.height / 2 - (textPaint.descent() + textPaint.ascent()) / 2)
+        //((textPaint.descent() + textPaint.ascent()) / 2) is the distance from the baseline to the center.
+
+        //((textPaint.descent() + textPaint.ascent()) / 2) is the distance from the baseline to the center.
+        canvas.drawText("Hello", xPos.toFloat(), yPos.toFloat(), textPaint)
 
     }
 
