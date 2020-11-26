@@ -8,4 +8,8 @@
         <attr name="lb_background" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="CustomTextView">
+        <attr name="ctv_text" format="string" />
+    </declare-styleable>
+
 </resources>

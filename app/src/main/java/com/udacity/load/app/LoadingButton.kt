@@ -23,10 +23,7 @@ class LoadingButton @JvmOverloads constructor(
     private var backgroundColor: Int? = null
 
     init {
-        backgroundColor = ContextCompat.getColor(context, R.color.purple_500_50)
-
-        val customTextView = CustomTextView(context)
-
+        backgroundColor = ContextCompat.getColor(context, R.color.purple_500_30)
         init(attrs)
     }
 
@@ -55,6 +52,9 @@ class LoadingButton @JvmOverloads constructor(
 
             typedArray.recycle()
         }
+
+
+//        binding.customTextView.text = "Woz!"
     }
 
     fun animateToEnd() {
