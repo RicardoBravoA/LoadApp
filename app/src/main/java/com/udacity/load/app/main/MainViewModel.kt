@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.udacity.load.app.domain.model.ItemModel
 import com.udacity.load.app.domain.usecase.DownloadUseCase
 import com.udacity.load.app.domain.util.ResultType
+import com.udacity.load.app.util.Constant
 import com.udacity.load.app.util.resources.ResourcesProvider
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -48,7 +49,9 @@ class MainViewModel(
     fun getData(context: Context): List<ItemModel> {
         val list = mutableListOf<ItemModel>()
 
-//        list.add(ItemModel(1, context.getString(R.string.select_glide_message), ))
+        list.add(ItemModel(1, resourcesProvider.glideMessage(), Constant.GLIDE_URL))
+        list.add(ItemModel(2, resourcesProvider.loadAppMessage(), Constant.LOAD_APP_URL))
+        list.add(ItemModel(3, resourcesProvider.retrofitMessage(), Constant.RETROFIT_URL))
 
         return list
     }
