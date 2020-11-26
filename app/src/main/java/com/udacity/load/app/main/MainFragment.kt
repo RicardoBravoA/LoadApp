@@ -43,22 +43,6 @@ class MainFragment : Fragment() {
         binding = FragmentMainBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        /*binding.customButton.setOnClickListener {
-            GlobalScope.launch(Dispatchers.Main) {
-
-                binding.customAnimationView.progress(100f)
-
-                *//*
-                mainViewModel.load("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip")*//*
-            }
-
-        }
-
-        binding.progressButton.setOnClickListener {
-            binding.loadingButton.complete()
-            binding.customAnimationView.progress(100f, 0L)
-        }*/
-
         mainViewModel.itemList.observe(viewLifecycleOwner, {
             showData(it)
         })
@@ -75,6 +59,7 @@ class MainFragment : Fragment() {
         binding.loadingButton.setOnClickListener {
             itemModel?.let {
                 binding.loadingButton.onClick()
+                mainViewModel.load(it.url)
             } ?: Toast.makeText(
                 requireContext(),
                 requireContext().getString(R.string.error_select_group),
