@@ -41,7 +41,6 @@ class MainFragment : Fragment(), ProgressListener {
 
         binding.customButton.setOnClickListener {
             GlobalScope.launch(Dispatchers.Main) {
-                binding.loadingButton.onClick()
 
                 binding.customAnimationView.progress(100f)
 

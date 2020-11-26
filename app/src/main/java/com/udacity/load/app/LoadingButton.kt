@@ -34,16 +34,6 @@ class LoadingButton @JvmOverloads constructor(
         init(attrs)
     }
 
-    fun onClick() {
-        binding.motionLayout.setTransition(R.id.transition_end)
-        binding.motionLayout.setTransitionDuration(0)
-        binding.motionLayout.transitionToEnd()
-
-        binding.motionLayout.setTransition(R.id.transition_start)
-        binding.motionLayout.setTransitionDuration(Constant.DURATION)
-        binding.motionLayout.transitionToEnd()
-    }
-
     private fun init(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(
             attrs,
@@ -75,6 +65,15 @@ class LoadingButton @JvmOverloads constructor(
         binding.motionLayout.setOnClickListener {
             binding.customTextView.text = actionText
             binding.circularView.progress(100f)
+
+            binding.motionLayout.setTransition(R.id.transition_end)
+            binding.motionLayout.setTransitionDuration(0)
+            binding.motionLayout.transitionToEnd()
+
+            binding.motionLayout.setTransition(R.id.transition_start)
+            binding.motionLayout.setTransitionDuration(Constant.DURATION)
+            binding.motionLayout.transitionToEnd()
+
         }
     }
 
