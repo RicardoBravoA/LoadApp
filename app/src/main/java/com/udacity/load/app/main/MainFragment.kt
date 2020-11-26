@@ -39,13 +39,13 @@ class MainFragment : Fragment(), ProgressListener {
         binding = FragmentMainBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        binding.customButton.setOnClickListener {
+        /*binding.customButton.setOnClickListener {
             GlobalScope.launch(Dispatchers.Main) {
 
                 binding.customAnimationView.progress(100f)
 
-                /*
-                mainViewModel.load("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip")*/
+                *//*
+                mainViewModel.load("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip")*//*
             }
 
         }
@@ -53,13 +53,13 @@ class MainFragment : Fragment(), ProgressListener {
         binding.progressButton.setOnClickListener {
             binding.loadingButton.complete()
             binding.customAnimationView.progress(100f, 0L)
-        }
+        }*/
 
         return binding.root
     }
 
     override fun load(progress: Int, contentLength: Long) {
-        GlobalScope.launch(Dispatchers.Main) {
+        /*GlobalScope.launch(Dispatchers.Main) {
 
             if (contentLength != -1L) {
                 val circleAnimation =
@@ -77,7 +77,7 @@ class MainFragment : Fragment(), ProgressListener {
                 println("z- completed")
             }
 
-        }
+        }*/
 
     }
 
