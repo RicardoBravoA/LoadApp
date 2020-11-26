@@ -2,7 +2,9 @@ package com.udacity.load.app
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
+import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
 
@@ -35,24 +37,15 @@ class CustomTextView @JvmOverloads constructor(
     }
 
     private fun drawCenter(canvas: Canvas, text: String) {
-        /*val textPaint = TextPaint()
-        textPaint.textAlign = Align.CENTER
-        textPaint.textSize = 20 * resources.displayMetrics.density
-        textPaint.color = Color.WHITE
 
-        val xPos = canvas.width / 2
-        val yPos = (canvas.height / 2 - (textPaint.descent() + textPaint.ascent()) / 2).toInt()
-        canvas.drawText(text, xPos.toFloat(), yPos.toFloat(), textPaint)*/
-
-        val textPaint = Paint()
+        val textPaint = TextPaint()
         textPaint.textAlign = Paint.Align.CENTER
+        textPaint.textSize = 20 * resources.displayMetrics.density
+        textPaint.color = Color.BLACK
 
         val xPos = canvas.width / 2
         val yPos = (canvas.height / 2 - (textPaint.descent() + textPaint.ascent()) / 2)
-        //((textPaint.descent() + textPaint.ascent()) / 2) is the distance from the baseline to the center.
-
-        //((textPaint.descent() + textPaint.ascent()) / 2) is the distance from the baseline to the center.
-        canvas.drawText("Hello", xPos.toFloat(), yPos.toFloat(), textPaint)
+        canvas.drawText(text, xPos.toFloat(), yPos, textPaint)
 
     }
 
