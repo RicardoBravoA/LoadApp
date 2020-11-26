@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.udacity.load.app.data.listener.ProgressListener
 import com.udacity.load.app.data.repository.DownloadDataRepository
 import com.udacity.load.app.domain.usecase.DownloadUseCase
+import com.udacity.load.app.util.resources.ResourcesProvider
 
 @Suppress("UNCHECKED_CAST")
 class MainViewModelFactory(
@@ -17,8 +18,9 @@ class MainViewModelFactory(
             @Suppress("UNCHECKED_CAST")
 
             val downloadUseCase = DownloadUseCase(DownloadDataRepository(progressListener))
+            val resourcesProvider = ResourcesProvider(app)
 
-            return MainViewModel(app, downloadUseCase) as T
+            return MainViewModel(app, downloadUseCase, resourcesProvider) as T
         }
         throw IllegalArgumentException("Unable to construct view model")
     }

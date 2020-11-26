@@ -7,14 +7,18 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.udacity.load.app.R
 import com.udacity.load.app.domain.model.ItemModel
 import com.udacity.load.app.domain.usecase.DownloadUseCase
 import com.udacity.load.app.domain.util.ResultType
+import com.udacity.load.app.util.resources.ResourcesProvider
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class MainViewModel(application: Application, private val downloadUseCase: DownloadUseCase) :
+class MainViewModel(
+    application: Application,
+    private val downloadUseCase: DownloadUseCase,
+    private val resourcesProvider: ResourcesProvider
+) :
     AndroidViewModel(application) {
 
     private val _itemList = MutableLiveData<List<ItemModel>>()
