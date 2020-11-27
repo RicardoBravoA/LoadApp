@@ -11,4 +11,13 @@ class ResourcesProvider(private val context: Context) : ResourcesInterface {
 
     override fun retrofitMessage() = context.getString(R.string.select_retrofit_message)
 
+    override fun glideNotificationMessage() =
+        context.getString(R.string.notification_glide_description)
+
+    override fun loadAppNotificationMessage() =
+        context.getString(R.string.notification_load_app_description)
+
+    override fun retrofitNotificationMessage() =
+        context.getString(R.string.notification_retrofit_description)
+
 }
