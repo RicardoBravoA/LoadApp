@@ -34,9 +34,4 @@ object FileUtils {
         return null
     }
 
-
-    fun calculateProgress(actualSize: Long, totalSize: Long): Int {
-        return (100 * actualSize / totalSize).toInt()
-    }
-
 }

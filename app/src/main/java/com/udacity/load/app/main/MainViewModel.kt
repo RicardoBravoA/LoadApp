@@ -2,7 +2,6 @@ package com.udacity.load.app.main
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -26,6 +25,10 @@ class MainViewModel(
     val itemList: LiveData<List<ItemModel>>
         get() = _itemList
 
+    private val _success = MutableLiveData<Boolean>()
+    val success: LiveData<Boolean>
+        get() = _success
+
     init {
         getData(application)
     }
@@ -38,14 +41,14 @@ class MainViewModel(
                     getApplication<Application>().filesDir.absolutePath
                 )) {
                     is ResultType.Success -> {
-                        Log.i("z- load", "success")
+                        _success.value = true
                     }
                     is ResultType.Error -> {
-                        Log.i("z- load", "error")
+                        _success.value = false
                     }
                 }
             } catch (e: Exception) {
-                Log.i("z- load", "Error")
+                _success.value = false
             }
         }
     }
