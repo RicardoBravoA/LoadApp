@@ -74,9 +74,11 @@ class MainFragment : Fragment() {
                 requireContext(),
                 requireContext().getString(R.string.error_select_group),
                 Toast.LENGTH_SHORT
-            )
-                .show()
+            ).show()
+        }
 
+        binding.appCompatImageView.setOnClickListener {
+            binding.loadingButton.complete()
         }
 
         return binding.root

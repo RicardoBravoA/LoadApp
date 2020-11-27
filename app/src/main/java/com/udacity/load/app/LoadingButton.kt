@@ -3,6 +3,7 @@ package com.udacity.load.app
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -65,9 +66,8 @@ class LoadingButton @JvmOverloads constructor(
 
     fun onClick() {
         binding.customTextView.text = actionText
+        binding.circularView.visibility = View.VISIBLE
         binding.circularView.progress(100f)
-
-        clear()
 
         binding.motionLayout.setTransition(R.id.transition_start)
         binding.motionLayout.setTransitionDuration(Constant.DURATION)
@@ -78,12 +78,16 @@ class LoadingButton @JvmOverloads constructor(
         binding.motionLayout.setTransition(R.id.transition_end)
         binding.motionLayout.setTransitionDuration(0)
         binding.motionLayout.transitionToEnd()
+
         binding.circularView.progress(0f, 0L)
+        binding.circularView.visibility = View.GONE
+        binding.customTextView.text = defaultText
     }
 
     fun complete() {
         binding.motionLayout.progress = 1f
         binding.circularView.progress(100f, 0L)
+        clear()
     }
 
 }
