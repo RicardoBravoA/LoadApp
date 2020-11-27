@@ -57,9 +57,30 @@ class MainViewModel(
         viewModelScope.launch {
             val list = mutableListOf<ItemModel>()
 
-            list.add(ItemModel(1, resourcesProvider.glideMessage(), Constant.GLIDE_URL))
-            list.add(ItemModel(2, resourcesProvider.loadAppMessage(), Constant.LOAD_APP_URL))
-            list.add(ItemModel(3, resourcesProvider.retrofitMessage(), Constant.RETROFIT_URL))
+            list.add(
+                ItemModel(
+                    1,
+                    resourcesProvider.glideMessage(),
+                    Constant.GLIDE_URL,
+                    resourcesProvider.glideNotificationMessage()
+                )
+            )
+            list.add(
+                ItemModel(
+                    2,
+                    resourcesProvider.loadAppMessage(),
+                    Constant.LOAD_APP_URL,
+                    resourcesProvider.loadAppNotificationMessage()
+                )
+            )
+            list.add(
+                ItemModel(
+                    3,
+                    resourcesProvider.retrofitMessage(),
+                    Constant.RETROFIT_URL,
+                    resourcesProvider.retrofitNotificationMessage()
+                )
+            )
 
             _itemList.value = list
         }
