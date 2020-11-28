@@ -1,7 +1,14 @@
 package com.udacity.load.app.main
 
+import android.app.AlarmManager
 import android.app.Application
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import android.os.SystemClock
+import androidx.core.app.AlarmManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +16,9 @@ import androidx.lifecycle.viewModelScope
 import com.udacity.load.app.domain.model.ItemModel
 import com.udacity.load.app.domain.usecase.DownloadUseCase
 import com.udacity.load.app.domain.util.ResultType
+import com.udacity.load.app.receiver.AlarmReceiver
 import com.udacity.load.app.util.Constant
+import com.udacity.load.app.util.notification.cancelNotifications
 import com.udacity.load.app.util.resources.ResourcesProvider
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -29,8 +38,31 @@ class MainViewModel(
     val success: LiveData<Boolean>
         get() = _success
 
+    private val notifyPendingIntent: PendingIntent
+
+    private val alarmManager = application.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+    private val notifyIntent = Intent(application, AlarmReceiver::class.java)
+
+    private var _alarmOn = MutableLiveData<Boolean>()
+    val isAlarmOn: LiveData<Boolean>
+        get() = _alarmOn
+
     init {
-        getData(application)
+        getData()
+
+        _alarmOn.value = PendingIntent.getBroadcast(
+            getApplication(),
+            Constant.REQUEST_CODE,
+            notifyIntent,
+            PendingIntent.FLAG_NO_CREATE
+        ) != null
+
+        notifyPendingIntent = PendingIntent.getBroadcast(
+            getApplication(),
+            Constant.REQUEST_CODE,
+            notifyIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
     }
 
     fun load(url: String) {
@@ -42,6 +74,23 @@ class MainViewModel(
                 )) {
                     is ResultType.Success -> {
                         _success.value = true
+
+                        val triggerTime = SystemClock.elapsedRealtime()
+
+                        val notificationManager =
+                            ContextCompat.getSystemService(
+                                getApplication(),
+                                NotificationManager::class.java
+                            ) as NotificationManager
+                        notificationManager.cancelNotifications()
+
+                        AlarmManagerCompat.setExactAndAllowWhileIdle(
+                            alarmManager,
+                            AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                            triggerTime,
+                            notifyPendingIntent
+                        )
+
                     }
                     is ResultType.Error -> {
                         _success.value = false
@@ -53,7 +102,7 @@ class MainViewModel(
         }
     }
 
-    private fun getData(context: Context) {
+    private fun getData() {
         viewModelScope.launch {
             val list = mutableListOf<ItemModel>()
 
