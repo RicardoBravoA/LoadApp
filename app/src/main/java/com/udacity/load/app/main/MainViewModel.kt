@@ -61,7 +61,7 @@ class MainViewModel(
                             DetailModel(
                                 itemModel.description,
                                 itemModel.notificationDescription,
-                                true
+                                false
                             )
                         )
 
