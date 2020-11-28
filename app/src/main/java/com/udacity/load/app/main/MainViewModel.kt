@@ -60,7 +60,7 @@ class MainViewModel(
                         showNotification(
                             DetailModel(
                                 itemModel.description,
-                                itemModel.notificationDescription,
+                                itemModel.notificationDescriptionError,
                                 false
                             )
                         )
@@ -71,7 +71,7 @@ class MainViewModel(
                         showNotification(
                             DetailModel(
                                 itemModel.description,
-                                itemModel.notificationDescription,
+                                itemModel.notificationDescriptionError,
                                 false
                             )
                         )
@@ -82,7 +82,7 @@ class MainViewModel(
                 showNotification(
                     DetailModel(
                         itemModel.description,
-                        itemModel.notificationDescription,
+                        itemModel.notificationDescriptionError,
                         false
                     )
                 )
