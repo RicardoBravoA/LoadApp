@@ -9,10 +9,7 @@ import androidx.core.app.NotificationCompat
 import com.udacity.load.app.MainActivity
 import com.udacity.load.app.R
 import com.udacity.load.app.receiver.SnoozeReceiver
-
-private val NOTIFICATION_ID = 0
-private val REQUEST_CODE = 0
-private val FLAGS = 0
+import com.udacity.load.app.util.Constant
 
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
 
@@ -20,7 +17,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
 
     val contentPendingIntent = PendingIntent.getActivity(
         applicationContext,
-        NOTIFICATION_ID,
+        Constant.NOTIFICATION_ID,
         contentIntent,
         PendingIntent.FLAG_UPDATE_CURRENT
     )
@@ -36,9 +33,9 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     val snoozeIntent = Intent(applicationContext, SnoozeReceiver::class.java)
     val snoozePendingIntent: PendingIntent = PendingIntent.getBroadcast(
         applicationContext,
-        REQUEST_CODE,
+        Constant.REQUEST_CODE,
         snoozeIntent,
-        FLAGS
+        Constant.FLAGS
     )
 
     val builder = NotificationCompat.Builder(
@@ -63,7 +60,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
             snoozePendingIntent
         )
         .setPriority(NotificationCompat.PRIORITY_HIGH)
-    notify(NOTIFICATION_ID, builder.build())
+    notify(Constant.NOTIFICATION_ID, builder.build())
 }
 
 fun NotificationManager.cancelNotifications() {

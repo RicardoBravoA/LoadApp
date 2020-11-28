@@ -1,7 +1,10 @@
 package com.udacity.load.app.main
 
+import android.app.AlarmManager
 import android.app.Application
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +12,7 @@ import androidx.lifecycle.viewModelScope
 import com.udacity.load.app.domain.model.ItemModel
 import com.udacity.load.app.domain.usecase.DownloadUseCase
 import com.udacity.load.app.domain.util.ResultType
+import com.udacity.load.app.receiver.AlarmReceiver
 import com.udacity.load.app.util.Constant
 import com.udacity.load.app.util.resources.ResourcesProvider
 import kotlinx.coroutines.launch
@@ -29,8 +33,31 @@ class MainViewModel(
     val success: LiveData<Boolean>
         get() = _success
 
+    private val notifyPendingIntent: PendingIntent
+
+    private val alarmManager = application.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+    private val notifyIntent = Intent(application, AlarmReceiver::class.java)
+
+    private var _alarmOn = MutableLiveData<Boolean>()
+    val isAlarmOn: LiveData<Boolean>
+        get() = _alarmOn
+
     init {
         getData(application)
+
+        _alarmOn.value = PendingIntent.getBroadcast(
+            getApplication(),
+            Constant.REQUEST_CODE,
+            notifyIntent,
+            PendingIntent.FLAG_NO_CREATE
+        ) != null
+
+        notifyPendingIntent = PendingIntent.getBroadcast(
+            getApplication(),
+            Constant.REQUEST_CODE,
+            notifyIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
     }
 
     fun load(url: String) {
