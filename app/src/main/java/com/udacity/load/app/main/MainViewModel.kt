@@ -99,7 +99,8 @@ class MainViewModel(
                     1,
                     resourcesProvider.glideMessage(),
                     Constant.GLIDE_URL,
-                    resourcesProvider.glideNotificationMessage()
+                    resourcesProvider.glideNotificationMessage(),
+                    resourcesProvider.glideNotificationMessageError()
                 )
             )
             list.add(
@@ -107,7 +108,8 @@ class MainViewModel(
                     2,
                     resourcesProvider.loadAppMessage(),
                     Constant.LOAD_APP_URL,
-                    resourcesProvider.loadAppNotificationMessage()
+                    resourcesProvider.loadAppNotificationMessage(),
+                    resourcesProvider.loadAppNotificationMessageError()
                 )
             )
             list.add(
@@ -115,7 +117,8 @@ class MainViewModel(
                     3,
                     resourcesProvider.retrofitMessage(),
                     Constant.RETROFIT_URL,
-                    resourcesProvider.retrofitNotificationMessage()
+                    resourcesProvider.retrofitNotificationMessage(),
+                    resourcesProvider.retrofitNotificationMessageError()
                 )
             )
 

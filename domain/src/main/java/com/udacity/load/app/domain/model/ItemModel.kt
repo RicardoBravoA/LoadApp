@@ -8,5 +8,6 @@ data class ItemModel(
     val id: Int,
     val description: String,
     val url: String,
-    val notificationDescription: String
+    val notificationDescription: String,
+    val notificationDescriptionError: String
 ) : Parcelable
