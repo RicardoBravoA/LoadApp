@@ -43,11 +43,11 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         .setContentIntent(contentPendingIntent)
         .setAutoCancel(true)
         .setStyle(notificationStyle)
-        /*.addAction(
+        .addAction(
             R.drawable.ic_notification,
             applicationContext.getString(R.string.notification_action),
             snoozePendingIntent
-        )*/
+        )
         .setPriority(NotificationCompat.PRIORITY_HIGH)
 
     notify(Constant.NOTIFICATION_ID, builder.build())
