@@ -40,6 +40,11 @@ class DetailActivity : AppCompatActivity() {
 
             }
         }
+
+        binding.contentDetail.okButton.setOnClickListener {
+            finish()
+        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
