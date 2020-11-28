@@ -2,6 +2,7 @@ package com.udacity.load.app.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.udacity.load.app.R
 import com.udacity.load.app.databinding.ActivityDetailBinding
@@ -24,11 +25,19 @@ class DetailActivity : AppCompatActivity() {
             val detailModel = it.getParcelable<DetailModel>(Constant.DATA)
             detailModel?.let { detailModel ->
                 binding.contentDetail.fileNameValueTextView.text =
-                    detailModel.notificationDescription
+                    detailModel.description
                 if (detailModel.status) {
-
+                    binding.contentDetail.statusValueTextView.text = getString(R.string.success)
+                } else {
+                    binding.contentDetail.statusValueTextView.text = getString(R.string.fail)
+                    binding.contentDetail.statusValueTextView.setTextColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.fail
+                        )
+                    )
                 }
-                binding.contentDetail.statusValueTextView.text = detailModel.status.toString()
+
             }
         }
     }

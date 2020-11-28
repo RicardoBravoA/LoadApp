@@ -25,6 +25,12 @@
 
     <style name="DetailTextView">
         <item name="android:textSize">@dimen/size_16</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="DetailTextViewValue">
+        <item name="android:textSize">@dimen/size_16</item>
+        <item name="android:textColor">@color/teal_700</item>
     </style>
 
 </resources>
