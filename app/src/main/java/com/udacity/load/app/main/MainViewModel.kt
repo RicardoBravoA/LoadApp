@@ -60,8 +60,8 @@ class MainViewModel(
                         showNotification(
                             DetailModel(
                                 itemModel.description,
-                                itemModel.notificationDescriptionError,
-                                false
+                                itemModel.notificationDescription,
+                                true
                             )
                         )
 
