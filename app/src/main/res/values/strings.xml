@@ -5,7 +5,6 @@
     <string name="main_fragment_label">Main Fragment</string>
     <string name="detail_fragment_label">Detail Fragment</string>
 
-    <string name="app_description">Download files from Internet</string>
     <string name="notification_action">Check the status</string>
 
     <string name="notification_channel_id" translatable="false">download_channel</string>
@@ -16,11 +15,12 @@
     <string name="notification_glide_description">Glide repository is downloaded</string>
     <string name="notification_retrofit_description">Retrofit repository is downloaded</string>
 
+    <string name="notification_load_app_description_error">The Project 3 repository was not downloaded</string>
+    <string name="notification_glide_description_error">Glide repository was not downloaded</string>
+    <string name="notification_retrofit_description_error">Retrofit repository was not downloaded</string>
+
     <string name="notification_channel_description">Download notification</string>
 
-    <string name="notification_button">See changes</string>
-
-    <string name="button_name">Click me</string>
     <string name="title_activity_detail">DetailActivity</string>
 
     <string name="download">Download</string>
@@ -30,5 +30,11 @@
     <string name="select_glide_message">Glide - Image Loading Library by BumpTech</string>
     <string name="select_load_app_message">LoadApp - Current repository by Udacity</string>
     <string name="select_retrofit_message">Retrofit - Type-safe HTTP client for Android and Java by Square, Inc</string>
+
+    <string name="file_name">File name:</string>
+    <string name="status">Status:</string>
+    <string name="success">Success</string>
+    <string name="fail">Fail</string>
+    <string name="ok">Ok</string>
 
 </resources>

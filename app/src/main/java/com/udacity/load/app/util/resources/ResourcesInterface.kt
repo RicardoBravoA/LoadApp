@@ -8,5 +8,8 @@ interface ResourcesInterface {
     fun glideNotificationMessage(): String
     fun loadAppNotificationMessage(): String
     fun retrofitNotificationMessage(): String
+    fun glideNotificationMessageError(): String
+    fun loadAppNotificationMessageError(): String
+    fun retrofitNotificationMessageError(): String
 
 }

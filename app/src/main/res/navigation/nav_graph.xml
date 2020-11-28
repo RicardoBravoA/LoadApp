@@ -9,17 +9,5 @@
         android:id="@+id/MainFragment"
         android:name="com.udacity.load.app.main.MainFragment"
         android:label="@string/main_fragment_label"
-        tools:layout="@layout/fragment_main">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/DetailFragment"
-            app:popUpTo="@id/DetailFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
-    <fragment
-        android:id="@+id/DetailFragment"
-        android:name="com.udacity.load.app.detail.DetailFragment"
-        android:label="@string/detail_fragment_label"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_main" />
 </navigation>

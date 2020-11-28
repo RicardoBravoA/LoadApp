@@ -31,9 +31,9 @@ object ApiManager {
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(logging)
-                .connectTimeout(Constants.DURATION, TimeUnit.MILLISECONDS)
-                .readTimeout(Constants.DURATION, TimeUnit.MILLISECONDS)
-                .writeTimeout(Constants.DURATION, TimeUnit.MILLISECONDS)
+                .connectTimeout(Constants.DURATION, TimeUnit.SECONDS)
+                .readTimeout(Constants.DURATION, TimeUnit.SECONDS)
+                .writeTimeout(Constants.DURATION, TimeUnit.SECONDS)
                 .build()
 
             return Retrofit.Builder()

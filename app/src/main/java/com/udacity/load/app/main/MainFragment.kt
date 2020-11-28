@@ -5,7 +5,6 @@ import android.app.NotificationManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,15 +48,12 @@ class MainFragment : Fragment() {
 
             itemModel =
                 mainViewModel.itemList.value?.firstOrNull { mySelectedIndex == it.id }
-            Log.i("z- itemModel", itemModel.toString())
         }
 
         mainViewModel.success.observe(viewLifecycleOwner, {
             if (it) {
-                Log.i("z- success", "true")
                 binding.loadingButton.complete()
             } else {
-                Log.i("z- success", "error")
                 binding.loadingButton.clear()
             }
         })
@@ -71,10 +67,6 @@ class MainFragment : Fragment() {
                 requireContext().getString(R.string.error_select_group),
                 Toast.LENGTH_SHORT
             ).show()
-        }
-
-        binding.appCompatImageView.setOnClickListener {
-            binding.loadingButton.complete()
         }
 
         createChannel(
