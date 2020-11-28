@@ -38,42 +38,37 @@ class MainViewModel(
     val success: LiveData<Boolean>
         get() = _success
 
-    private val notifyPendingIntent: PendingIntent
+    private lateinit var notifyPendingIntent: PendingIntent
 
     private val alarmManager = application.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-    private val notifyIntent = Intent(application, AlarmReceiver::class.java)
 
-    private var _alarmOn = MutableLiveData<Boolean>()
-    val isAlarmOn: LiveData<Boolean>
-        get() = _alarmOn
 
     init {
         getData()
-
-        _alarmOn.value = PendingIntent.getBroadcast(
-            getApplication(),
-            Constant.REQUEST_CODE,
-            notifyIntent,
-            PendingIntent.FLAG_NO_CREATE
-        ) != null
-
-        notifyPendingIntent = PendingIntent.getBroadcast(
-            getApplication(),
-            Constant.REQUEST_CODE,
-            notifyIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
     }
 
-    fun load(url: String) {
+    fun load(itemModel: ItemModel) {
         viewModelScope.launch {
             try {
                 when (val result = downloadUseCase.load(
-                    url,
+                    itemModel.url,
                     getApplication<Application>().filesDir.absolutePath
                 )) {
                     is ResultType.Success -> {
                         _success.value = true
+
+                        val notifyIntent = Intent(getApplication(), AlarmReceiver::class.java)
+                        notifyIntent.putExtra(
+                            Constant.BODY_MESSAGE,
+                            itemModel.notificationDescription
+                        )
+
+                        notifyPendingIntent = PendingIntent.getBroadcast(
+                            getApplication(),
+                            Constant.REQUEST_CODE,
+                            notifyIntent,
+                            PendingIntent.FLAG_UPDATE_CURRENT
+                        )
 
                         val triggerTime = SystemClock.elapsedRealtime()
 

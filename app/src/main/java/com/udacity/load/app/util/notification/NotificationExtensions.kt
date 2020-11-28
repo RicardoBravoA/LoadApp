@@ -4,7 +4,6 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import com.udacity.load.app.MainActivity
 import com.udacity.load.app.R
@@ -22,13 +21,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         PendingIntent.FLAG_UPDATE_CURRENT
     )
 
-    val notificationImage = BitmapFactory.decodeResource(
-        applicationContext.resources,
-        R.drawable.ic_notification
-    )
-    val bigPicStyle = NotificationCompat.BigPictureStyle()
-        .bigPicture(notificationImage)
-        .bigLargeIcon(null)
+    val notificationStyle = NotificationCompat.InboxStyle()
 
     val snoozeIntent = Intent(applicationContext, SnoozeReceiver::class.java)
     val snoozePendingIntent: PendingIntent = PendingIntent.getBroadcast(
@@ -47,19 +40,16 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
                 .getString(R.string.notification_title)
         )
         .setContentText(messageBody)
-
         .setContentIntent(contentPendingIntent)
         .setAutoCancel(true)
-
-        .setStyle(bigPicStyle)
-        .setLargeIcon(notificationImage)
-
+        .setStyle(notificationStyle)
         .addAction(
             R.drawable.ic_notification,
             applicationContext.getString(R.string.notification_action),
             snoozePendingIntent
         )
         .setPriority(NotificationCompat.PRIORITY_HIGH)
+
     notify(Constant.NOTIFICATION_ID, builder.build())
 }
 
