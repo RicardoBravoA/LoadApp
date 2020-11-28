@@ -6,5 +6,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class DetailModel(
     val description: String,
+    val notificationDescription: String,
     val status: Boolean
 ) : Parcelable

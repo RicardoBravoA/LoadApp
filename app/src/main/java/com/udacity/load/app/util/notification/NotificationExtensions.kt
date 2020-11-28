@@ -7,11 +7,13 @@ import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.udacity.load.app.R
 import com.udacity.load.app.detail.DetailActivity
+import com.udacity.load.app.domain.model.DetailModel
 import com.udacity.load.app.util.Constant
 
-fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
+fun NotificationManager.sendNotification(detailModel: DetailModel, applicationContext: Context) {
 
     val contentIntent = Intent(applicationContext, DetailActivity::class.java)
+    contentIntent.putExtra(Constant.DATA, detailModel)
 
     val contentPendingIntent = PendingIntent.getActivity(
         applicationContext,
@@ -33,7 +35,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         .setContentIntent(contentPendingIntent)
         .setAutoCancel(true)
         .setStyle(notificationStyle)
-        .setContentText(messageBody)
+        .setContentText(detailModel.notificationDescription)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
 
     notify(Constant.NOTIFICATION_ID, builder.build())

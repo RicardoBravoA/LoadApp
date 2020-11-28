@@ -13,6 +13,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.udacity.load.app.domain.model.DetailModel
 import com.udacity.load.app.domain.model.ItemModel
 import com.udacity.load.app.domain.usecase.DownloadUseCase
 import com.udacity.load.app.domain.util.ResultType
@@ -56,10 +57,16 @@ class MainViewModel(
                     is ResultType.Success -> {
                         _success.value = true
 
+                        val detailModel = DetailModel(
+                            itemModel.description,
+                            itemModel.notificationDescription,
+                            true
+                        )
+
                         val notifyIntent = Intent(getApplication(), AlarmReceiver::class.java)
                         notifyIntent.putExtra(
-                            Constant.BODY_MESSAGE,
-                            itemModel.notificationDescription
+                            Constant.DATA,
+                            detailModel
                         )
 
                         notifyPendingIntent = PendingIntent.getBroadcast(

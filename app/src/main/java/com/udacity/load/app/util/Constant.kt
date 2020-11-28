@@ -10,5 +10,5 @@ object Constant {
     const val NOTIFICATION_ID = 0
     const val REQUEST_CODE = 1
     const val FLAGS = 2
-    const val BODY_MESSAGE = "BODY MESSAGE"
+    const val DATA = "DATA"
 }
