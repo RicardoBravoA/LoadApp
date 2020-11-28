@@ -1,42 +1,34 @@
 package com.udacity.load.app.receiver
 
-import android.app.AlarmManager
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.SystemClock
-import android.text.format.DateUtils
-import androidx.core.app.AlarmManagerCompat
 import androidx.core.content.ContextCompat
+import com.udacity.load.app.detail.DetailActivity
+import com.udacity.load.app.domain.model.DetailModel
 import com.udacity.load.app.util.Constant
 
 class SnoozeReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        val triggerTime = SystemClock.elapsedRealtime() + DateUtils.MINUTE_IN_MILLIS
 
-        val notifyIntent = Intent(context, AlarmReceiver::class.java)
-        val notifyPendingIntent = PendingIntent.getBroadcast(
-            context,
-            Constant.REQUEST_CODE,
-            notifyIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        AlarmManagerCompat.setExactAndAllowWhileIdle(
-            alarmManager,
-            AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            triggerTime,
-            notifyPendingIntent
-        )
+        intent.extras?.let {
+            val data = it.getBundle(Constant.DATA)?.getParcelable<DetailModel>(Constant.DATA)
 
-        val notificationManager = ContextCompat.getSystemService(
-            context,
-            NotificationManager::class.java
-        ) as NotificationManager
-        notificationManager.cancelAll()
+            val notificationManager = ContextCompat.getSystemService(
+                context,
+                NotificationManager::class.java
+            ) as NotificationManager
+            notificationManager.cancelAll()
+
+            data?.let { detailModel ->
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra(Constant.DATA, detailModel)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                context.startActivity(intent)
+            }
+        }
     }
 
 }

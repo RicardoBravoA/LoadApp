@@ -8,7 +8,7 @@ object Constant {
     const val RETROFIT_URL = "https://github.com/square/retrofit/archive/master.zip"
 
     const val NOTIFICATION_ID = 0
-    const val REQUEST_CODE = 1
-    const val FLAGS = 2
+    const val REQUEST_CODE = 0
+    const val FLAGS = 0
     const val DATA = "DATA"
 }
