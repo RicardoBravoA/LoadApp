@@ -16,6 +16,8 @@
     <string name="notification_glide_description">Glide repository is downloaded</string>
     <string name="notification_retrofit_description">Retrofit repository is downloaded</string>
 
+    <string name="notification_channel_description">Download notification</string>
+
     <string name="notification_button">See changes</string>
 
     <string name="button_name">Click me</string>
