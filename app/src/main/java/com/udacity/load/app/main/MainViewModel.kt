@@ -57,48 +57,35 @@ class MainViewModel(
                     is ResultType.Success -> {
                         _success.value = true
 
-                        val detailModel = DetailModel(
-                            itemModel.description,
-                            itemModel.notificationDescription,
-                            true
-                        )
-
-                        val notifyIntent = Intent(getApplication(), AlarmReceiver::class.java)
-                        notifyIntent.putExtra(
-                            Constant.DATA,
-                            detailModel
-                        )
-
-                        notifyPendingIntent = PendingIntent.getBroadcast(
-                            getApplication(),
-                            Constant.REQUEST_CODE,
-                            notifyIntent,
-                            PendingIntent.FLAG_UPDATE_CURRENT
-                        )
-
-                        val triggerTime = SystemClock.elapsedRealtime()
-
-                        val notificationManager =
-                            ContextCompat.getSystemService(
-                                getApplication(),
-                                NotificationManager::class.java
-                            ) as NotificationManager
-                        notificationManager.cancelNotifications()
-
-                        AlarmManagerCompat.setExactAndAllowWhileIdle(
-                            alarmManager,
-                            AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                            triggerTime,
-                            notifyPendingIntent
+                        showNotification(
+                            DetailModel(
+                                itemModel.description,
+                                itemModel.notificationDescription,
+                                true
+                            )
                         )
 
                     }
                     is ResultType.Error -> {
                         _success.value = false
+                        showNotification(
+                            DetailModel(
+                                itemModel.description,
+                                itemModel.notificationDescription,
+                                false
+                            )
+                        )
                     }
                 }
             } catch (e: Exception) {
                 _success.value = false
+                showNotification(
+                    DetailModel(
+                        itemModel.description,
+                        itemModel.notificationDescription,
+                        false
+                    )
+                )
             }
         }
     }
@@ -134,7 +121,37 @@ class MainViewModel(
 
             _itemList.value = list
         }
+    }
 
+    private fun showNotification(detailModel: DetailModel) {
+        val notifyIntent = Intent(getApplication(), AlarmReceiver::class.java)
+        notifyIntent.putExtra(
+            Constant.DATA,
+            detailModel
+        )
+
+        notifyPendingIntent = PendingIntent.getBroadcast(
+            getApplication(),
+            Constant.REQUEST_CODE,
+            notifyIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val triggerTime = SystemClock.elapsedRealtime()
+
+        val notificationManager =
+            ContextCompat.getSystemService(
+                getApplication(),
+                NotificationManager::class.java
+            ) as NotificationManager
+        notificationManager.cancelNotifications()
+
+        AlarmManagerCompat.setExactAndAllowWhileIdle(
+            alarmManager,
+            AlarmManager.ELAPSED_REALTIME_WAKEUP,
+            triggerTime,
+            notifyPendingIntent
+        )
     }
 
 }
