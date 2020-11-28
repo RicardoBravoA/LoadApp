@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.os.SystemClock
 import androidx.core.app.AlarmManagerCompat
 import androidx.core.content.ContextCompat
@@ -38,8 +39,6 @@ class MainViewModel(
     private val _success = MutableLiveData<Boolean>()
     val success: LiveData<Boolean>
         get() = _success
-
-    private lateinit var notifyPendingIntent: PendingIntent
 
     private val alarmManager = application.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -128,12 +127,14 @@ class MainViewModel(
 
     private fun showNotification(detailModel: DetailModel) {
         val notifyIntent = Intent(getApplication(), AlarmReceiver::class.java)
+        val bundle = Bundle()
+        bundle.putParcelable(Constant.DATA, detailModel)
         notifyIntent.putExtra(
             Constant.DATA,
-            detailModel
+            bundle
         )
 
-        notifyPendingIntent = PendingIntent.getBroadcast(
+        val notifyPendingIntent = PendingIntent.getBroadcast(
             getApplication(),
             Constant.REQUEST_CODE,
             notifyIntent,

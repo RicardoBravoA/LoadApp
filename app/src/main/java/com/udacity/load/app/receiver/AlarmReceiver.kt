@@ -13,18 +13,20 @@ class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
 
-        val data = intent.getParcelableExtra<DetailModel>(Constant.DATA)
+        intent.extras?.let {
+            val data = it.getBundle(Constant.DATA)?.getParcelable<DetailModel>(Constant.DATA)
 
-        val notificationManager = ContextCompat.getSystemService(
-            context,
-            NotificationManager::class.java
-        ) as NotificationManager
+            val notificationManager = ContextCompat.getSystemService(
+                context,
+                NotificationManager::class.java
+            ) as NotificationManager
 
-        data?.let {
-            notificationManager.sendNotification(
-                it,
-                context
-            )
+            data?.let { detailModel ->
+                notificationManager.sendNotification(
+                    detailModel,
+                    context
+                )
+            }
         }
 
     }

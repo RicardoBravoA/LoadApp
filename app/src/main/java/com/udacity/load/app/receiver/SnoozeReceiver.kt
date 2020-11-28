@@ -10,9 +10,9 @@ import android.os.SystemClock
 import android.text.format.DateUtils
 import androidx.core.app.AlarmManagerCompat
 import androidx.core.content.ContextCompat
+import com.udacity.load.app.util.Constant
 
 class SnoozeReceiver : BroadcastReceiver() {
-    private val REQUEST_CODE = 0
 
     override fun onReceive(context: Context, intent: Intent) {
         val triggerTime = SystemClock.elapsedRealtime() + DateUtils.MINUTE_IN_MILLIS
@@ -20,7 +20,7 @@ class SnoozeReceiver : BroadcastReceiver() {
         val notifyIntent = Intent(context, AlarmReceiver::class.java)
         val notifyPendingIntent = PendingIntent.getBroadcast(
             context,
-            REQUEST_CODE,
+            Constant.REQUEST_CODE,
             notifyIntent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
