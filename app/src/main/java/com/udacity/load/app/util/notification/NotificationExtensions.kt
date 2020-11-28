@@ -5,14 +5,13 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
-import com.udacity.load.app.MainActivity
 import com.udacity.load.app.R
-import com.udacity.load.app.receiver.SnoozeReceiver
+import com.udacity.load.app.detail.DetailActivity
 import com.udacity.load.app.util.Constant
 
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
 
-    val contentIntent = Intent(applicationContext, MainActivity::class.java)
+    val contentIntent = Intent(applicationContext, DetailActivity::class.java)
 
     val contentPendingIntent = PendingIntent.getActivity(
         applicationContext,
@@ -23,14 +22,6 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
 
     val notificationStyle = NotificationCompat.InboxStyle()
 
-    val snoozeIntent = Intent(applicationContext, SnoozeReceiver::class.java)
-    val snoozePendingIntent: PendingIntent = PendingIntent.getBroadcast(
-        applicationContext,
-        Constant.REQUEST_CODE,
-        snoozeIntent,
-        Constant.FLAGS
-    )
-
     val builder = NotificationCompat.Builder(
         applicationContext,
         applicationContext.getString(R.string.notification_channel_id)
@@ -39,15 +30,10 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
             applicationContext
                 .getString(R.string.notification_title)
         )
-        .setContentText(messageBody)
         .setContentIntent(contentPendingIntent)
         .setAutoCancel(true)
         .setStyle(notificationStyle)
-        .addAction(
-            R.drawable.ic_notification,
-            applicationContext.getString(R.string.notification_action),
-            snoozePendingIntent
-        )
+        .setContentText(messageBody)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
 
     notify(Constant.NOTIFICATION_ID, builder.build())

@@ -1,13 +1,14 @@
-package com.udacity.load.app
+package com.udacity.load.app.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.udacity.load.app.R
 
-class MainActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_detail)
         setSupportActionBar(findViewById(R.id.toolbar))
     }
 }

@@ -42,7 +42,6 @@ class MainViewModel(
 
     private val alarmManager = application.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-
     init {
         getData()
     }
@@ -50,7 +49,7 @@ class MainViewModel(
     fun load(itemModel: ItemModel) {
         viewModelScope.launch {
             try {
-                when (val result = downloadUseCase.load(
+                when (downloadUseCase.load(
                     itemModel.url,
                     getApplication<Application>().filesDir.absolutePath
                 )) {
