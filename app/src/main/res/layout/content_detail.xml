@@ -10,6 +10,7 @@
 
         <TextView
             android:id="@+id/file_name_text_view"
+            style="@style/DetailTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/file_name"
@@ -19,6 +20,7 @@
 
         <TextView
             android:id="@+id/file_name_value_text_view"
+            style="@style/DetailTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,6 +36,7 @@
 
         <TextView
             android:id="@+id/statue_text_view"
+            style="@style/DetailTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/status"
@@ -43,6 +46,7 @@
 
         <TextView
             android:id="@+id/status_value_text_view"
+            style="@style/DetailTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_8"

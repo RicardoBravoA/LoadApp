@@ -22,4 +22,9 @@
     <style name="Theme.LoadApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.LoadApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="DetailTextView">
+        <item name="android:textSize">@dimen/size_16</item>
+    </style>
+
 </resources>

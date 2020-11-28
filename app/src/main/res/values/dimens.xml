@@ -8,4 +8,5 @@
     <dimen name="circular_view_size">30dp</dimen>
     <dimen name="padding_8">8dp</dimen>
     <dimen name="size_18">18sp</dimen>
+    <dimen name="size_16">16sp</dimen>
 </resources>

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.udacity.load.app.R
 import com.udacity.load.app.databinding.ActivityDetailBinding
+import com.udacity.load.app.domain.model.DetailModel
+import com.udacity.load.app.util.Constant
 
 class DetailActivity : AppCompatActivity() {
 
@@ -17,6 +19,18 @@ class DetailActivity : AppCompatActivity() {
 
         supportActionBar?.setDefaultDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        intent?.extras?.let {
+            val detailModel = it.getParcelable<DetailModel>(Constant.DATA)
+            detailModel?.let { detailModel ->
+                binding.contentDetail.fileNameValueTextView.text =
+                    detailModel.notificationDescription
+                if (detailModel.status) {
+
+                }
+                binding.contentDetail.statusValueTextView.text = detailModel.status.toString()
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
