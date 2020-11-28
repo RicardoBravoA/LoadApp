@@ -2,7 +2,6 @@ package com.udacity.load.app.main
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -13,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
-import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.udacity.load.app.R
@@ -22,11 +20,6 @@ import com.udacity.load.app.domain.model.ItemModel
 
 class MainFragment : Fragment() {
 
-    private var downloadID: Long = 0
-
-    private lateinit var notificationManager: NotificationManager
-    private lateinit var pendingIntent: PendingIntent
-    private lateinit var action: NotificationCompat.Action
     private lateinit var binding: FragmentMainBinding
     private var itemModel: ItemModel? = null
 
@@ -72,7 +65,7 @@ class MainFragment : Fragment() {
         binding.loadingButton.setOnClickListener {
             itemModel?.let {
                 binding.loadingButton.onClick()
-                mainViewModel.load(it.url)
+                mainViewModel.load(it)
             } ?: Toast.makeText(
                 requireContext(),
                 requireContext().getString(R.string.error_select_group),

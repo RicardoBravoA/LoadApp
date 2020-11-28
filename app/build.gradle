@@ -60,11 +60,6 @@ dependencies {
 
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
-    implementation 'com.google.firebase:firebase-core:17.0.0'
-    implementation 'com.google.firebase:firebase-iid:19.0.1'
-    implementation 'com.google.firebase:firebase-messaging:19.0.1'
-    implementation 'android.arch.work:work-runtime:1.0.1'
-
     implementation project(path: ':data')
     implementation project(path: ':domain')
 

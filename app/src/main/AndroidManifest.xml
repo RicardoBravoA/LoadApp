@@ -30,7 +30,7 @@
         <receiver
             android:name=".receiver.SnoozeReceiver"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false" />
 
     </application>
 
