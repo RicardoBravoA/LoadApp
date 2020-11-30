@@ -35,7 +35,10 @@
             android:layout_margin="@dimen/margin_20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:lb_action_text="@string/we_are_loading"
+            app:lb_background="@color/purple_700_50"
+            app:lb_default_text="@string/download" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
