@@ -5,8 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/custom_button_size"
-        android:background="@color/purple_500">
+        android:layout_height="@dimen/custom_button_size">
 
         <LinearLayout
             android:id="@+id/linear_text"
@@ -39,7 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:pv_progress="0"
-            app:pv_progressColor="@color/teal_700" />
+            app:pv_progressColor="@color/purple_700_50" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

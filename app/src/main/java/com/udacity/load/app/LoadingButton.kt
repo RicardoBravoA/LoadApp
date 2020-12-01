@@ -17,7 +17,14 @@ class LoadingButton @JvmOverloads constructor(
     private var progressColor = ContextCompat.getColor(context, R.color.purple_700_50)
 
     @ColorInt
-    private var backgroundColor: Int? = null
+    var customBackgroundColor: Int? = null
+        set(value) {
+            field = value
+            value?.let {
+                binding.constraintLayout.setBackgroundColor(it)
+            }
+            invalidate()
+        }
     var defaultText: String = context.getString(R.string.download)
         set(value) {
             field = value
@@ -30,7 +37,7 @@ class LoadingButton @JvmOverloads constructor(
         }
 
     init {
-        backgroundColor = ContextCompat.getColor(context, R.color.purple_700_50)
+        customBackgroundColor = ContextCompat.getColor(context, R.color.purple_700)
         init(attrs)
     }
 
@@ -43,10 +50,11 @@ class LoadingButton @JvmOverloads constructor(
 
             typedArray.also {
                 if (it.hasValue(R.styleable.LoadingButton_lb_background)) {
-                    backgroundColor = it.getColor(
+                    customBackgroundColor = it.getColor(
                         R.styleable.LoadingButton_lb_background,
-                        ContextCompat.getColor(context, R.color.purple_700_50)
+                        ContextCompat.getColor(context, R.color.purple_700)
                     )
+                    setLoadingBackgroundColor(customBackgroundColor!!)
                 }
 
                 if (it.hasValue(R.styleable.LoadingButton_lb_default_text)) {
@@ -103,6 +111,10 @@ class LoadingButton @JvmOverloads constructor(
 
     fun setProgressColor(color: Int) {
 //        binding.progressView.setProgressColor(color)
+    }
+
+    fun setLoadingBackgroundColor(@ColorInt color: Int) {
+        binding.constraintLayout.setBackgroundColor(color)
     }
 
 }
