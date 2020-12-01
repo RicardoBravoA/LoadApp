@@ -3,12 +3,10 @@ package com.udacity.load.app
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.udacity.load.app.databinding.LoadingButtonBinding
-import com.udacity.load.app.util.Constant
 
 class LoadingButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -16,9 +14,15 @@ class LoadingButton @JvmOverloads constructor(
 
     private var binding: LoadingButtonBinding =
         LoadingButtonBinding.inflate(LayoutInflater.from(context), this, true)
+    private var progressColor = ContextCompat.getColor(context, R.color.purple_700_50)
 
     @ColorInt
-    private var backgroundColor: Int? = null
+    var customBackgroundColor = ContextCompat.getColor(context, R.color.purple_500)
+        set(value) {
+            field = value
+            binding.constraintLayout.setBackgroundColor(field)
+            invalidate()
+        }
     var defaultText: String = context.getString(R.string.download)
         set(value) {
             field = value
@@ -31,63 +35,73 @@ class LoadingButton @JvmOverloads constructor(
         }
 
     init {
-        backgroundColor = ContextCompat.getColor(context, R.color.purple_700_50)
         init(attrs)
     }
 
     private fun init(attrs: AttributeSet?) {
-        val typedArray = context.obtainStyledAttributes(
-            attrs,
-            R.styleable.LoadingButton, 0, 0
-        )
+        attrs?.let {
+            val typedArray = context.obtainStyledAttributes(
+                attrs,
+                R.styleable.LoadingButton, 0, 0
+            )
 
-        typedArray.let {
-            if (it.hasValue(R.styleable.LoadingButton_lb_background)) {
-                backgroundColor = it.getColor(
-                    R.styleable.LoadingButton_lb_background,
+            typedArray.also {
+                if (it.hasValue(R.styleable.LoadingButton_lb_background)) {
+                    customBackgroundColor = it.getColor(
+                        R.styleable.LoadingButton_lb_background,
+                        ContextCompat.getColor(context, R.color.purple_500)
+                    )
+                    setLoadingBackgroundColor(customBackgroundColor)
+                }
+
+                if (it.hasValue(R.styleable.LoadingButton_lb_default_text)) {
+                    defaultText = it.getString(R.styleable.LoadingButton_lb_default_text).toString()
+                }
+
+                if (it.hasValue(R.styleable.LoadingButton_lb_action_text)) {
+                    actionText = it.getString(R.styleable.LoadingButton_lb_action_text).toString()
+                }
+
+                val progressColor = typedArray.getColor(
+                    R.styleable.LoadingButton_lb_progressColor,
                     ContextCompat.getColor(context, R.color.purple_700_50)
                 )
+                setProgressColor(progressColor)
+                it.recycle()
             }
-
-            if (it.hasValue(R.styleable.LoadingButton_lb_default_text)) {
-                defaultText = it.getString(R.styleable.LoadingButton_lb_default_text).toString()
-            }
-
-            if (it.hasValue(R.styleable.LoadingButton_lb_action_text)) {
-                actionText = it.getString(R.styleable.LoadingButton_lb_action_text).toString()
-            }
-
-            typedArray.recycle()
         }
 
         binding.customTextView.text = defaultText
-        binding.view.setBackgroundColor(backgroundColor!!)
+        setProgressColor(progressColor)
     }
 
     fun onClick() {
         binding.customTextView.text = actionText
-        binding.circularView.visibility = View.VISIBLE
+        binding.circularView.visibility = VISIBLE
         binding.circularView.progress(100f)
-
-        binding.motionLayout.setTransition(R.id.transition_start)
-        binding.motionLayout.setTransitionDuration(Constant.DURATION)
-        binding.motionLayout.transitionToEnd()
+        binding.progressView.visibility = VISIBLE
+        binding.progressView.setProgress(100)
     }
 
     fun clear() {
-        binding.motionLayout.setTransition(R.id.transition_end)
-        binding.motionLayout.setTransitionDuration(0)
-        binding.motionLayout.transitionToEnd()
-
+        binding.progressView.visibility = GONE
         binding.circularView.progress(0f, 0L)
-        binding.circularView.visibility = View.GONE
+        binding.circularView.visibility = GONE
         binding.customTextView.text = defaultText
     }
 
     fun complete() {
-        binding.motionLayout.progress = 1f
+        binding.progressView.setProgress(100, false)
         binding.circularView.progress(100f, 0L)
         clear()
+    }
+
+    fun setProgressColor(color: Int) {
+        binding.progressView.setProgressColor(color)
+    }
+
+    fun setLoadingBackgroundColor(@ColorInt color: Int) {
+        binding.constraintLayout.setBackgroundColor(color)
     }
 
 }

@@ -2,16 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/motion_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/custom_button_size"
-        android:background="@color/purple_500"
-        app:layoutDescription="@xml/fragment_main_scene"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="@dimen/custom_button_size">
 
         <LinearLayout
             android:id="@+id/linear_text"
@@ -36,15 +30,16 @@
 
         </LinearLayout>
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="@dimen/dimen_1"
+        <com.udacity.load.app.util.ProgressView
+            android:id="@+id/progress_view"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:pv_progress="0"
+            app:pv_progressColor="@color/purple_700_50" />
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

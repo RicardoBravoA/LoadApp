@@ -4,6 +4,8 @@
         <attr name="lb_background" format="color" />
         <attr name="lb_default_text" format="string" />
         <attr name="lb_action_text" format="string" />
+        <attr name="lb_progressColor" format="color" />
+        <attr name="lb_progress" format="integer" />
     </declare-styleable>
 
 </resources>

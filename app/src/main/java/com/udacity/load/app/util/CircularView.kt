@@ -55,7 +55,7 @@ class CircularView @JvmOverloads constructor(
         super.onDraw(canvas)
     }
 
-    fun progress(progress: Float, duration: Long = Constant.DURATION.toLong()) {
+    fun progress(progress: Float, duration: Long = Constant.DURATION) {
         // restart animation
         if (angle != 0f) {
             angle = 0f
