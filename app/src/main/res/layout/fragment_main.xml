@@ -3,19 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_main_scene"
         tools:context=".main.MainFragment">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView"
+        <View
+            android:id="@+id/background_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_200"
             android:background="@color/purple_700"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon_image_view"
+            android:layout_width="@dimen/dimen_200"
+            android:layout_height="@dimen/dimen_200"
+            app:layout_constraintBottom_toBottomOf="@id/background_view"
+            app:layout_constraintEnd_toEndOf="@id/background_view"
+            app:layout_constraintStart_toStartOf="@id/background_view"
+            app:layout_constraintTop_toTopOf="@id/background_view"
             app:srcCompat="@drawable/ic_download"
             app:tint="@color/teal_700" />
 
@@ -26,7 +36,7 @@
             android:layout_marginTop="@dimen/margin_20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
+            app:layout_constraintTop_toBottomOf="@+id/background_view" />
 
         <com.udacity.load.app.LoadingButton
             android:id="@+id/loading_button"
@@ -40,6 +50,6 @@
             app:lb_background="@color/purple_500"
             app:lb_default_text="@string/download" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </layout>
