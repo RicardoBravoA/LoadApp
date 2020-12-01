@@ -28,16 +28,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
 
-        <!--<com.udacity.load.app.util.ProgressView
-            android:id="@+id/progress_view"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:layout_constraintBottom_toTopOf="@+id/loading_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:pv_progress="100"
-            app:pv_progressColor="@color/teal_700" />-->
-
         <com.udacity.load.app.LoadingButton
             android:id="@+id/loading_button"
             android:layout_width="match_parent"

@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.udacity.load.app.R
 import com.udacity.load.app.databinding.FragmentMainBinding
 import com.udacity.load.app.domain.model.ItemModel
-import com.udacity.load.app.util.Constant
 
 class MainFragment : Fragment() {
 
@@ -60,16 +59,14 @@ class MainFragment : Fragment() {
         })
 
         binding.loadingButton.setOnClickListener {
-            /*itemModel?.let {
+            itemModel?.let {
                 binding.loadingButton.onClick()
                 mainViewModel.load(it)
             } ?: Toast.makeText(
                 requireContext(),
                 requireContext().getString(R.string.error_select_group),
                 Toast.LENGTH_SHORT
-            ).show()*/
-            binding.loadingButton.onClick()
-//            binding.progressView.setProgress(100)
+            ).show()
         }
 
         createChannel(

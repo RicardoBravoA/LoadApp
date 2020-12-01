@@ -79,35 +79,25 @@ class LoadingButton @JvmOverloads constructor(
         binding.customTextView.text = actionText
         binding.circularView.visibility = VISIBLE
         binding.circularView.progress(100f)
-
-//        binding.motionLayout.setTransition(R.id.transition_start)
-//        binding.motionLayout.setTransitionDuration(Constant.DURATION)
-//        binding.motionLayout.transitionToEnd()
-
+        binding.progressView.visibility = VISIBLE
         binding.progressView.setProgress(100)
-
     }
 
     fun clear() {
-//        binding.motionLayout.setTransition(R.id.transition_end)
-//        binding.motionLayout.setTransitionDuration(0)
-//        binding.motionLayout.transitionToEnd()
-
-//        binding.progressView.visibility = GONE
-
+        binding.progressView.visibility = GONE
         binding.circularView.progress(0f, 0L)
         binding.circularView.visibility = GONE
         binding.customTextView.text = defaultText
     }
 
     fun complete() {
-//        binding.progressView.setProgress(100, false)
+        binding.progressView.setProgress(100, false)
         binding.circularView.progress(100f, 0L)
         clear()
     }
 
     fun setProgressColor(color: Int) {
-//        binding.progressView.setProgressColor(color)
+        binding.progressView.setProgressColor(color)
     }
 
     fun setLoadingBackgroundColor(@ColorInt color: Int) {

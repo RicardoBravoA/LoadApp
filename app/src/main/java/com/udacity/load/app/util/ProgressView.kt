@@ -87,7 +87,7 @@ class ProgressView @JvmOverloads constructor(
             animator.duration = duration
             animator.start()
         } else {
-            currentProgress = 100
+            currentProgress = inputProgress
             updateRect(progressRectF)
             ViewCompat.postInvalidateOnAnimation(this)
         }
