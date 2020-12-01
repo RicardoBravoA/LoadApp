@@ -1,4 +1,4 @@
-package com.udacity.load.app.util
+package com.udacity.load.app.customview
 
 import android.content.Context
 import android.graphics.*
@@ -7,6 +7,7 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.udacity.load.app.R
+import com.udacity.load.app.util.Constant
 
 class CircularView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

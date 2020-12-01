@@ -1,4 +1,4 @@
-package com.udacity.load.app.util
+package com.udacity.load.app.customview
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.udacity.load.app.R
+import com.udacity.load.app.util.Constant
 
 class ProgressView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
