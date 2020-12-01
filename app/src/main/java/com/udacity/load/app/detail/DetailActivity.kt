@@ -21,7 +21,23 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDefaultDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        intent?.extras?.let {
+        val detailModel = DetailModel("Description", "Notification Description", true)
+
+        binding.contentDetail.fileNameValueTextView.text =
+            detailModel.description
+        if (detailModel.status) {
+            binding.contentDetail.statusValueTextView.text = getString(R.string.success)
+        } else {
+            binding.contentDetail.statusValueTextView.text = getString(R.string.fail)
+            binding.contentDetail.statusValueTextView.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.fail
+                )
+            )
+        }
+
+        /*intent?.extras?.let {
             val detailModel = it.getParcelable<DetailModel>(Constant.DATA)
             detailModel?.let { detailModel ->
                 binding.contentDetail.fileNameValueTextView.text =
@@ -39,7 +55,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
             }
-        }
+        }*/
 
         binding.contentDetail.okButton.setOnClickListener {
             finish()
