@@ -17,12 +17,10 @@ class LoadingButton @JvmOverloads constructor(
     private var progressColor = ContextCompat.getColor(context, R.color.purple_700_50)
 
     @ColorInt
-    var customBackgroundColor: Int? = null
+    var customBackgroundColor = ContextCompat.getColor(context, R.color.purple_500)
         set(value) {
             field = value
-            value?.let {
-                binding.constraintLayout.setBackgroundColor(it)
-            }
+            binding.constraintLayout.setBackgroundColor(field)
             invalidate()
         }
     var defaultText: String = context.getString(R.string.download)
@@ -37,7 +35,6 @@ class LoadingButton @JvmOverloads constructor(
         }
 
     init {
-        customBackgroundColor = ContextCompat.getColor(context, R.color.purple_700)
         init(attrs)
     }
 
@@ -52,9 +49,9 @@ class LoadingButton @JvmOverloads constructor(
                 if (it.hasValue(R.styleable.LoadingButton_lb_background)) {
                     customBackgroundColor = it.getColor(
                         R.styleable.LoadingButton_lb_background,
-                        ContextCompat.getColor(context, R.color.purple_700)
+                        ContextCompat.getColor(context, R.color.purple_500)
                     )
-                    setLoadingBackgroundColor(customBackgroundColor!!)
+                    setLoadingBackgroundColor(customBackgroundColor)
                 }
 
                 if (it.hasValue(R.styleable.LoadingButton_lb_default_text)) {
@@ -65,11 +62,11 @@ class LoadingButton @JvmOverloads constructor(
                     actionText = it.getString(R.styleable.LoadingButton_lb_action_text).toString()
                 }
 
-                val customProgressColor = typedArray.getColor(
+                val progressColor = typedArray.getColor(
                     R.styleable.LoadingButton_lb_progressColor,
-                    progressColor
+                    ContextCompat.getColor(context, R.color.purple_700_50)
                 )
-                setProgressColor(customProgressColor)
+                setProgressColor(progressColor)
                 it.recycle()
             }
         }

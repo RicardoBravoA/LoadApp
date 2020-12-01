@@ -16,7 +16,7 @@ class ProgressView @JvmOverloads constructor(
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
     private var duration = Constant.DURATION
-    private var progressColor = ContextCompat.getColor(context, R.color.teal_700)
+    private var progressColor = ContextCompat.getColor(context, R.color.purple_700_50)
     private var oldProgress = 0
     private var currentProgress = 0
 
@@ -36,7 +36,7 @@ class ProgressView @JvmOverloads constructor(
             if (array.length() > 0) {
                 progressColor = array.getColor(
                     R.styleable.ProgressView_pv_progressColor,
-                    ContextCompat.getColor(context, R.color.teal_700)
+                    ContextCompat.getColor(context, R.color.purple_700_50)
                 )
 
                 val progress =
