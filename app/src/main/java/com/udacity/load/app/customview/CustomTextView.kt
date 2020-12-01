@@ -1,4 +1,4 @@
-package com.udacity.load.app
+package com.udacity.load.app.customview
 
 import android.content.Context
 import android.graphics.Canvas
@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
+import com.udacity.load.app.R
 
 class CustomTextView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

@@ -1,4 +1,4 @@
-package com.udacity.load.app
+package com.udacity.load.app.customview
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import com.udacity.load.app.R
 import com.udacity.load.app.databinding.LoadingButtonBinding
 
 class LoadingButton @JvmOverloads constructor(

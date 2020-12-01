@@ -18,19 +18,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.udacity.load.app.CustomTextView
+            <com.udacity.load.app.customview.CustomTextView
                 android:id="@+id/custom_text_view"
                 android:layout_width="@dimen/dimen_150"
                 android:layout_height="wrap_content" />
 
-            <com.udacity.load.app.util.CircularView
+            <com.udacity.load.app.customview.CircularView
                 android:id="@+id/circular_view"
                 android:layout_width="@dimen/circular_view_size"
                 android:layout_height="@dimen/circular_view_size" />
 
         </LinearLayout>
 
-        <com.udacity.load.app.util.ProgressView
+        <com.udacity.load.app.customview.ProgressView
             android:id="@+id/progress_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

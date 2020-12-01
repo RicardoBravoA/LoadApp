@@ -38,7 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/background_view" />
 
-        <com.udacity.load.app.LoadingButton
+        <com.udacity.load.app.customview.LoadingButton
             android:id="@+id/loading_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/custom_button_size"
