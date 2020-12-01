@@ -1,9 +1,11 @@
 package com.udacity.load.app.customview
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.LinearInterpolator
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.udacity.load.app.R
@@ -15,7 +17,8 @@ class CircularView @JvmOverloads constructor(
 
     private var paint: Paint? = null
     private var rect: RectF? = null
-    var angle = 0f
+    private var animator: ValueAnimator? = null
+    var angle = 0
 
     @ColorInt
     private var backgroundColor: Int? = null
@@ -43,29 +46,40 @@ class CircularView @JvmOverloads constructor(
             paint?.color = backgroundColor!!
             typedArray.recycle()
         }
+    }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        rect?.set(0f, 0f, w.toFloat(), h.toFloat())
     }
 
     override fun onDraw(canvas: Canvas) {
-        val left = 0
-        val width = width
-        val top = 0
-        rect!![left.toFloat(), top.toFloat(), left + width.toFloat()] = top + width.toFloat()
-
-        canvas.drawArc(rect!!, 0f, angle, true, paint!!)
-        super.onDraw(canvas)
+        paint?.color = backgroundColor!!
+        rect?.let {
+            canvas.drawArc(
+                it,
+                START_ANGLE,
+                angle.toFloat(),
+                true,
+                paint!!
+            )
+        }
     }
 
-    fun progress(progress: Float, duration: Long = Constant.DURATION) {
-        // restart animation
-        if (angle != 0f) {
-            angle = 0f
-            val circleAnimation = CircularViewAnimation(this, 0f)
-            circleAnimation.duration = duration
-            startAnimation(circleAnimation)
+    fun show(timeDuration: Long = Constant.DURATION) {
+        animator?.cancel()
+        animator = ValueAnimator.ofInt(0, 360).apply {
+            duration = timeDuration
+            interpolator = LinearInterpolator()
+            addUpdateListener { valueAnimator ->
+                angle = valueAnimator.animatedValue as Int
+                invalidate()
+            }
         }
-        val circleAnimation = CircularViewAnimation(this, progress)
-        circleAnimation.duration = duration
-        startAnimation(circleAnimation)
+        animator?.start()
+    }
+
+    companion object {
+        private const val START_ANGLE = 360f
     }
 }
